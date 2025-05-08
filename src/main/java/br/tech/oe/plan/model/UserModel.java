@@ -32,8 +32,14 @@ public class UserModel {
     @Column(nullable = false)
     private String password;
 
-    @Column
-    private Long roleId;
+    @ManyToOne
+    @JoinColumn(
+            name = "role_id",
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "fk_users_role_id"),
+            nullable = false
+    )
+    private UserRoleModel role;
 
     @Column
     private Long statusId;
@@ -115,12 +121,12 @@ public class UserModel {
         this.password = password;
     }
 
-    public Long getRoleId() {
-        return roleId;
+    public UserRoleModel getRole() {
+        return role;
     }
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
+    public void setRole(UserRoleModel role) {
+        this.role = role;
     }
 
     public Long getStatusId() {
