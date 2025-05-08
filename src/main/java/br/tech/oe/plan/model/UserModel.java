@@ -3,14 +3,19 @@ package br.tech.oe.plan.model;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.UUID;
 
 @Entity
 @Table(name = "users")
-public class UserModel {
+public class UserModel implements UserDetails {
 
     @Column(unique = true, insertable = false, updatable = false, columnDefinition = "serial")
     private Long id;
@@ -19,6 +24,9 @@ public class UserModel {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(unique = true, insertable = false, updatable = false)
     private UUID uuid;
+
+    @Column(unique = true, nullable = false)
+    private String username;
 
     @Column(nullable = false)
     private String firstName;
@@ -72,6 +80,20 @@ public class UserModel {
     @Column
     @UpdateTimestamp
     private Instant updatedAt;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role.getRole().name()));
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public Long getId() {
         return id;

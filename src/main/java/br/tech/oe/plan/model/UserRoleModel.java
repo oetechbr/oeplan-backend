@@ -4,20 +4,17 @@ import br.tech.oe.plan.enums.UserRole;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.io.Serializable;
 import java.time.Instant;
-import java.util.UUID;
 
 @Entity
 @Table(name = "user_roles")
-public class UserRoleModel {
-
-    @Column(unique = true, insertable = false, updatable = false, columnDefinition = "serial")
-    private Long id;
+public class UserRoleModel implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, insertable = false, updatable = false)
-    private UUID uuid;
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     @Column(unique = true, nullable = false)
@@ -33,14 +30,6 @@ public class UserRoleModel {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public UUID getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
     }
 
     public UserRole getRole() {

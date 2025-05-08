@@ -1,7 +1,7 @@
 package br.tech.oe.plan.controller.v1;
 
 import br.tech.oe.plan.controller.v1.interfaces.BaseController;
-import br.tech.oe.plan.dto.UserDTO;
+import br.tech.oe.plan.dto.user.UserDTO;
 import br.tech.oe.plan.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

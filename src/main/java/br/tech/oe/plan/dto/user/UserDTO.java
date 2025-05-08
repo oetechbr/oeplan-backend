@@ -1,4 +1,4 @@
-package br.tech.oe.plan.dto;
+package br.tech.oe.plan.dto.user;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -6,6 +6,7 @@ import java.util.UUID;
 
 public class UserDTO {
     private UUID uuid;
+    private String username;
     private String firstName;
     private String lastName;
     private String email;
@@ -27,6 +28,14 @@ public class UserDTO {
 
     public void setUuid(UUID uuid) {
         this.uuid = uuid;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getFirstName() {

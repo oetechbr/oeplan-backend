@@ -1,7 +1,7 @@
 package br.tech.oe.plan.service.impl;
 
-import br.tech.oe.plan.dto.UserDTO;
 import br.tech.oe.plan.dto.mappers.UserMapper;
+import br.tech.oe.plan.dto.user.UserDTO;
 import br.tech.oe.plan.exception.ItemNotFoundException;
 import br.tech.oe.plan.repository.UserRepository;
 import br.tech.oe.plan.service.UserService;
