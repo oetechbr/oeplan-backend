@@ -12,13 +12,13 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Password {
 
-    String message() default "Invalid password";
+    String message() default "Password must be at least {minLength} characters long, contain at least one uppercase letter, one digit, and one special character.";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
 
-    int minLength() default 8;
+    int minLength() default 12;
 
     boolean requireUppercase() default true;
 
