@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -11,12 +12,12 @@ import java.util.UUID;
 @Table(name = "users")
 public class UserModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, insertable = false, updatable = false)
+    @Column(unique = true, insertable = false, updatable = false, columnDefinition = "serial")
     private Long id;
 
-    @Column(nullable = false)
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(unique = true, insertable = false, updatable = false)
     private UUID uuid;
 
     @Column(nullable = false)
@@ -59,12 +60,12 @@ public class UserModel {
     private boolean emailVerified;
 
     @CreationTimestamp
-    @Column(name = "created_at", updatable = false, insertable = false)
-    private LocalDateTime createdAt;
+    @Column(updatable = false)
+    private Instant createdAt;
 
+    @Column
     @UpdateTimestamp
-    @Column(name = "updated_at", updatable = false, insertable = false)
-    private LocalDateTime updatedAt;
+    private Instant updatedAt;
 
     public Long getId() {
         return id;
@@ -186,19 +187,19 @@ public class UserModel {
         this.emailVerified = emailVerified;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public Instant getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public Instant getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
+    public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
     }
 }
