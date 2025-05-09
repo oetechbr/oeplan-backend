@@ -43,8 +43,32 @@ public class SecurityConfig {
                         .configurationSource(corsConfigurationSource())
                 )
                 .authorizeHttpRequests(authorizeRequest -> authorizeRequest
-                        .requestMatchers(HttpMethod.GET, "/api/v1/ping").hasAnyRole("ADMIN")
-                        .anyRequest().permitAll()
+                        // Public routes
+                        .requestMatchers(HttpMethod.GET, "/api/v1/ping").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/").permitAll()
+
+                        // Auth routes
+                        .requestMatchers(HttpMethod.POST, "/api/v1/auth/login", "/api/v1/auth/register").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/auth/logout").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/auth/me").authenticated()
+                        .requestMatchers(HttpMethod.PATCH, "/api/v1/auth/me").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/auth/me").authenticated()
+
+                        // User routes
+                        .requestMatchers(HttpMethod.GET, "/api/v1/users").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/users/{uuid}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/users").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PATCH, "/api/v1/users/{uuid}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/users/{uuid}").hasRole("ADMIN")
+
+                        // Task routes
+                        .requestMatchers(HttpMethod.GET, "/api/v1/tasks").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR", "TEACHER")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/tasks/{uuid}").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR", "TEACHER")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/tasks").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR")
+                        .requestMatchers(HttpMethod.PATCH, "/api/v1/tasks/{uuid}").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/tasks/{uuid}").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR")
+
+                        .anyRequest().denyAll()
                 )
                 .logout(logout -> logout
                         .deleteCookies(sessionCookieName)
