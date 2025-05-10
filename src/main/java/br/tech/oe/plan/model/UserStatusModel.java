@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.time.Instant;
 
 @Entity
-@Table(name = "user_status")
+@Table(name = "user_statuses")
 public class UserStatusModel implements Serializable {
 
     @Id
