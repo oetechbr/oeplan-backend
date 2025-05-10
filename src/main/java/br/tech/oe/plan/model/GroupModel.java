@@ -2,6 +2,8 @@ package br.tech.oe.plan.model;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
@@ -27,6 +29,7 @@ public class GroupModel {
             foreignKey = @ForeignKey(name = "fk_groups_user_uuid"),
             nullable = false
     )
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private UserModel owner;
 
     @Column(nullable = false)
