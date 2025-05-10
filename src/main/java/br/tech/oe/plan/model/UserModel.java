@@ -40,7 +40,7 @@ public class UserModel implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(
             name = "role_id",
             referencedColumnName = "id",
@@ -49,8 +49,14 @@ public class UserModel implements UserDetails {
     )
     private UserRoleModel role;
 
-    @Column
-    private Long statusId;
+    @ManyToOne(optional = false)
+    @JoinColumn(
+            name = "status_id",
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "fk_users_status_id"),
+            nullable = false
+    )
+    private UserStatusModel status;
 
     @Column
     private String profilePicture;
@@ -151,12 +157,12 @@ public class UserModel implements UserDetails {
         this.role = role;
     }
 
-    public Long getStatusId() {
-        return statusId;
+    public UserStatusModel getStatus() {
+        return status;
     }
 
-    public void setStatusId(Long statusId) {
-        this.statusId = statusId;
+    public void setStatus(UserStatusModel status) {
+        this.status = status;
     }
 
     public String getProfilePicture() {

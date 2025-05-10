@@ -7,8 +7,10 @@ import br.tech.oe.plan.exception.ItemAlreadyExistException;
 import br.tech.oe.plan.exception.ItemNotFoundException;
 import br.tech.oe.plan.model.UserModel;
 import br.tech.oe.plan.model.UserRoleModel;
+import br.tech.oe.plan.model.UserStatusModel;
 import br.tech.oe.plan.repository.UserRepository;
 import br.tech.oe.plan.repository.UserRoleRepository;
+import br.tech.oe.plan.repository.UserStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,16 +24,20 @@ public class AuthServiceImpl implements UserDetailsService {
 
     private final UserRoleRepository userRoleRepository;
 
+    private final UserStatusRepository userStatusRepository;
+
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
     public AuthServiceImpl(
             UserRepository userRepository,
             UserRoleRepository userRoleRepository,
+            UserStatusRepository userStatusRepository,
             PasswordEncoder passwordEncoder
     ) {
         this.userRepository = userRepository;
         this.userRoleRepository = userRoleRepository;
+        this.userStatusRepository = userStatusRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -43,11 +49,15 @@ public class AuthServiceImpl implements UserDetailsService {
         String encryptedPass = passwordEncoder.encode(request.getPassword());
         request.setPassword(encryptedPass);
 
+        UserModel newUser = UserMapper.fromRegisterDTO(request);
+
         UserRoleModel role = userRoleRepository.findById(request.getRoleId())
                 .orElseThrow(() -> new ItemNotFoundException("Invalid role"));
-
-        UserModel newUser = UserMapper.fromRegisterDTO(request);
         newUser.setRole(role);
+
+        UserStatusModel status = userStatusRepository.findById(request.getStatusId())
+                .orElseThrow(() -> new ItemNotFoundException("Invalid status"));
+        newUser.setStatus(status);
 
         var res = userRepository.save(newUser);
         return UserMapper.toDTO(res);

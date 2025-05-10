@@ -11,7 +11,7 @@ public class UserDTO {
     private String lastName;
     private String email;
     private String role;
-    private Long statusId;
+    private String status;
     private String profilePicture;
     private String phone;
     private String gender;
@@ -70,12 +70,12 @@ public class UserDTO {
         this.role = role;
     }
 
-    public Long getStatusId() {
-        return statusId;
+    public String getStatus() {
+        return status;
     }
 
-    public void setStatusId(Long statusId) {
-        this.statusId = statusId;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getProfilePicture() {

@@ -16,7 +16,7 @@ public class UserMapper {
         dto.setLastName(model.getLastName());
         dto.setEmail(model.getEmail());
         dto.setRole(model.getRole().getRole().name());
-        dto.setStatusId(model.getStatusId());
+        dto.setStatus(model.getStatus().getStatus().name());
         dto.setProfilePicture(model.getProfilePicture());
         dto.setPhone(model.getPhone());
         dto.setGender(model.getGender());
@@ -42,7 +42,6 @@ public class UserMapper {
         model.setLastName(registerDTO.getLastName());
         model.setPassword(registerDTO.getPassword());
         model.setEmail(registerDTO.getEmail());
-        model.setStatusId(registerDTO.getStatusId());
         model.setProfilePicture(registerDTO.getProfilePicture());
         model.setPhone(registerDTO.getPhone());
         model.setGender(registerDTO.getGender());
