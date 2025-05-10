@@ -3,10 +3,8 @@ package br.tech.oe.plan.dto;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
-public class TaskDTO {
-    private UUID uuid;
+public class TaskDTO extends BaseDTO {
     private String title;
     private String description;
     private LocalDateTime dueDate;
@@ -18,16 +16,6 @@ public class TaskDTO {
     private List<String> tags;
     private Instant archivedAt;
     private Instant completedAt;
-    private Instant createdAt;
-    private Instant updatedAt;
-
-    public UUID getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
-    }
 
     public String getTitle() {
         return title;
@@ -115,21 +103,5 @@ public class TaskDTO {
 
     public void setCompletedAt(Instant completedAt) {
         this.completedAt = completedAt;
-    }
-
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Instant getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Instant updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }

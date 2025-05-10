@@ -3,6 +3,7 @@ package br.tech.oe.plan.controller.v1;
 import br.tech.oe.plan.controller.v1.interfaces.BaseController;
 import br.tech.oe.plan.dto.TaskDTO;
 import br.tech.oe.plan.service.TaskService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +22,7 @@ public class TaskController implements BaseController<TaskDTO> {
     }
 
     @Override
-    public ResponseEntity<List<TaskDTO>> findAll() {
+    public ResponseEntity<List<TaskDTO>> findAll(HttpSession session) {
         return ResponseEntity.ok(taskService.findAll());
     }
 
