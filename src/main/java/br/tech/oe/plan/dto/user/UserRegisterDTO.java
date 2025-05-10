@@ -1,114 +1,60 @@
-package br.tech.oe.plan.model;
+package br.tech.oe.plan.dto.user;
 
-import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import br.tech.oe.plan.validation.constraints.Password;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.UUID;
 
-@Entity
-@Table(name = "users")
-public class UserModel implements UserDetails {
-
-    @Column(unique = true, insertable = false, updatable = false, columnDefinition = "serial")
-    private Long id;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(unique = true, insertable = false, updatable = false)
-    private UUID uuid;
-
-    @Column(unique = true, nullable = false)
+public class UserRegisterDTO {
+    @NotBlank
     private String username;
 
-    @Column(nullable = false)
+    @NotBlank
     private String firstName;
 
-    @Column(nullable = false)
+    @NotBlank
     private String lastName;
 
-    @Column(nullable = false)
+    @Email
+    @NotBlank
     private String email;
 
-    @Column(nullable = false)
+    @NotBlank
+    @Password
     private String password;
 
-    @ManyToOne
-    @JoinColumn(
-            name = "role_id",
-            referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "fk_users_role_id"),
-            nullable = false
-    )
-    private UserRoleModel role;
+    @NotNull
+    private Long roleId;
 
-    @Column
     private Long statusId;
 
-    @Column
     private String profilePicture;
 
-    @Column
+    @NotNull
     private String phone;
 
-    @Column
+    @NotNull
     private String gender;
 
-    @Column
+    @NotNull
     private LocalDateTime birthDate;
 
-    @Column
+    @NotNull
     private String department;
 
-    @Column
+    @NotNull
     private String titlePosition;
 
-    @Column
     private boolean emailVerified;
 
-    @CreationTimestamp
-    @Column(updatable = false)
-    private Instant createdAt;
-
-    @Column
-    @UpdateTimestamp
-    private Instant updatedAt;
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role.getRole().name()));
-    }
-
-    @Override
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public UUID getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
     }
 
     public String getFirstName() {
@@ -143,12 +89,12 @@ public class UserModel implements UserDetails {
         this.password = password;
     }
 
-    public UserRoleModel getRole() {
-        return role;
+    public Long getRoleId() {
+        return roleId;
     }
 
-    public void setRole(UserRoleModel role) {
-        this.role = role;
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
 
     public Long getStatusId() {
@@ -213,21 +159,5 @@ public class UserModel implements UserDetails {
 
     public void setEmailVerified(boolean emailVerified) {
         this.emailVerified = emailVerified;
-    }
-
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Instant getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Instant updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }

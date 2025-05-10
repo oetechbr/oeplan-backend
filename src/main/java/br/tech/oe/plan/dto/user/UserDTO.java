@@ -1,14 +1,16 @@
-package br.tech.oe.plan.dto;
+package br.tech.oe.plan.dto.user;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class UserDTO {
     private UUID uuid;
+    private String username;
     private String firstName;
     private String lastName;
     private String email;
-    private Long roleId;
+    private String role;
     private Long statusId;
     private String profilePicture;
     private String phone;
@@ -17,8 +19,8 @@ public class UserDTO {
     private String department;
     private String titlePosition;
     private boolean emailVerified;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private Instant createdAt;
+    private Instant updatedAt;
 
     public UUID getUuid() {
         return uuid;
@@ -26,6 +28,14 @@ public class UserDTO {
 
     public void setUuid(UUID uuid) {
         this.uuid = uuid;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getFirstName() {
@@ -52,12 +62,12 @@ public class UserDTO {
         this.email = email;
     }
 
-    public Long getRoleId() {
-        return roleId;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public Long getStatusId() {
@@ -124,19 +134,19 @@ public class UserDTO {
         this.emailVerified = emailVerified;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public Instant getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public Instant getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
+    public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
     }
 }
