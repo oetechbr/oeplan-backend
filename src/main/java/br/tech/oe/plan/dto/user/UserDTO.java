@@ -1,11 +1,10 @@
 package br.tech.oe.plan.dto.user;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.util.UUID;
+import br.tech.oe.plan.dto.BaseDTO;
 
-public class UserDTO {
-    private UUID uuid;
+import java.time.LocalDateTime;
+
+public class UserDTO extends BaseDTO {
     private String username;
     private String firstName;
     private String lastName;
@@ -19,16 +18,6 @@ public class UserDTO {
     private String department;
     private String titlePosition;
     private boolean emailVerified;
-    private Instant createdAt;
-    private Instant updatedAt;
-
-    public UUID getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
-    }
 
     public String getUsername() {
         return username;
@@ -132,21 +121,5 @@ public class UserDTO {
 
     public void setEmailVerified(boolean emailVerified) {
         this.emailVerified = emailVerified;
-    }
-
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Instant getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Instant updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }
