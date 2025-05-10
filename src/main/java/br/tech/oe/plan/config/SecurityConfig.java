@@ -68,6 +68,13 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PATCH, "/api/v1/tasks/{uuid}").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR")
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/tasks/{uuid}").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR")
 
+                        // Group routes
+                        .requestMatchers(HttpMethod.GET, "/api/v1/groups").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR", "TEACHER")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/groups/{uuid}").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR", "TEACHER")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/groups").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR")
+                        .requestMatchers(HttpMethod.PATCH, "/api/v1/groups/{uuid}").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/groups/{uuid}").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR")
+
                         .anyRequest().denyAll()
                 )
                 .logout(logout -> logout

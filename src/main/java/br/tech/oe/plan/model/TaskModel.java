@@ -2,6 +2,8 @@ package br.tech.oe.plan.model;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
@@ -44,6 +46,15 @@ public class TaskModel {
 
     @Column(nullable = false)
     private Long visibilityId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
+            name = "group_uuid",
+            referencedColumnName = "uuid",
+            foreignKey = @ForeignKey(name = "fk_tasks_group_uuid")
+    )
+    @OnDelete(action = OnDeleteAction.SET_NULL)
+    private GroupModel group;
 
     @Column(columnDefinition = "text[]")
     private List<String> tags;
