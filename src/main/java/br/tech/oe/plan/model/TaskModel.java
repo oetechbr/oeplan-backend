@@ -45,6 +45,14 @@ public class TaskModel {
     @Column(nullable = false)
     private Long visibilityId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
+            name = "group_uuid",
+            referencedColumnName = "uuid",
+            foreignKey = @ForeignKey(name = "fk_tasks_group_uuid")
+    )
+    private GroupModel group;
+
     @Column(columnDefinition = "text[]")
     private List<String> tags;
 
