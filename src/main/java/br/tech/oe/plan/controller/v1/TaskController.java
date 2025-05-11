@@ -1,7 +1,11 @@
 package br.tech.oe.plan.controller.v1;
 
 import br.tech.oe.plan.controller.v1.interfaces.BaseController;
+import br.tech.oe.plan.controller.v1.interfaces.CommentController;
+import br.tech.oe.plan.dto.CommentDTO;
+import br.tech.oe.plan.dto.CreateCommentDTO;
 import br.tech.oe.plan.dto.TaskDTO;
+import br.tech.oe.plan.service.CommentService;
 import br.tech.oe.plan.service.TaskService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +17,15 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/tasks")
-public class TaskController implements BaseController<TaskDTO> {
+public class TaskController implements BaseController<TaskDTO>, CommentController {
 
     private final TaskService taskService;
 
-    public TaskController(TaskService taskService) {
+    private final CommentService commentService;
+
+    public TaskController(TaskService taskService, CommentService commentService) {
         this.taskService = taskService;
+        this.commentService = commentService;
     }
 
     @Override
@@ -29,6 +36,27 @@ public class TaskController implements BaseController<TaskDTO> {
     @Override
     public ResponseEntity<TaskDTO> findById(UUID uuid) {
         return ResponseEntity.ok(taskService.findById(uuid));
+    }
+
+    @Override
+    public ResponseEntity<List<CommentDTO>> findAllComments(UUID taskUuid) {
+        return ResponseEntity.ok(commentService.findAll(taskUuid));
+    }
+
+    @Override
+    public ResponseEntity<CommentDTO> findCommentById(UUID taskUuid, UUID uuid) {
+        return ResponseEntity.ok(commentService.findById(taskUuid, uuid));
+    }
+
+    @Override
+    public ResponseEntity<CommentDTO> saveComment(CreateCommentDTO commentDTO, UUID taskUuid) {
+        return ResponseEntity.ok(commentService.save(commentDTO, taskUuid));
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteComment(UUID uuid) {
+        commentService.delete(uuid);
+        return ResponseEntity.noContent().build();
     }
 }
 
