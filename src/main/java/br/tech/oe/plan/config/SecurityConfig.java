@@ -42,40 +42,38 @@ public class SecurityConfig {
                 .cors(cors -> cors
                         .configurationSource(corsConfigurationSource())
                 )
-                .authorizeHttpRequests(authorizeRequest -> authorizeRequest
+                .authorizeHttpRequests(authorize -> authorize
                         // Public routes
-                        .requestMatchers(HttpMethod.GET, "/api/v1/ping").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/ping", "/api/v1/").permitAll()
 
                         // Auth routes
                         .requestMatchers(HttpMethod.POST, "/api/v1/auth/login", "/api/v1/auth/register").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/v1/auth/logout").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/auth/me").authenticated()
-                        .requestMatchers(HttpMethod.PATCH, "/api/v1/auth/me").authenticated()
-                        .requestMatchers(HttpMethod.DELETE, "/api/v1/auth/me").authenticated()
+                        .requestMatchers("/api/v1/auth/me", "/api/v1/auth/logout").authenticated()
 
-                        // User routes
-                        .requestMatchers(HttpMethod.GET, "/api/v1/users").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/v1/users/{uuid}").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/api/v1/users").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PATCH, "/api/v1/users/{uuid}").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/v1/users/{uuid}").hasRole("ADMIN")
+                        // User routes (admin only)
+                        .requestMatchers("/api/v1/users/**").hasRole("ADMIN")
 
                         // Task routes
-                        .requestMatchers(HttpMethod.GET, "/api/v1/tasks").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR", "TEACHER")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/tasks/*").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR", "TEACHER")
                         .requestMatchers(HttpMethod.GET, "/api/v1/tasks/{uuid}").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR", "TEACHER")
                         .requestMatchers(HttpMethod.POST, "/api/v1/tasks").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR")
                         .requestMatchers(HttpMethod.PATCH, "/api/v1/tasks/{uuid}").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR")
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/tasks/{uuid}").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR")
 
-                        // Group routes
-                        .requestMatchers(HttpMethod.GET, "/api/v1/groups").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR", "TEACHER")
-                        .requestMatchers(HttpMethod.GET, "/api/v1/groups/{uuid}").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR", "TEACHER")
-                        .requestMatchers(HttpMethod.POST, "/api/v1/groups").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR")
-                        .requestMatchers(HttpMethod.PATCH, "/api/v1/groups/{uuid}").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR")
-                        .requestMatchers(HttpMethod.DELETE, "/api/v1/groups/{uuid}").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR")
+                        // Task comment routes
+                        .requestMatchers(HttpMethod.GET, "/api/v1/tasks/{uuid}/comments").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR", "TEACHER")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/tasks/{uuid}/comments/{commentUuid}").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR", "TEACHER")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/tasks/{uuid}/comments").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR", "TEACHER")
+                        .requestMatchers(HttpMethod.PATCH, "/api/v1/tasks/{uuid}/comments/{commentUuid}").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR", "TEACHER")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/tasks/{uuid}/comments/{commentUuid}").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR", "TEACHER")
 
-                        .anyRequest().denyAll()
+                        // Group routes
+                        .requestMatchers(HttpMethod.GET, "/api/v1/groups/*").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR", "TEACHER")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/groups").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR")
+                        .requestMatchers(HttpMethod.PATCH, "/api/v1/groups/*").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/groups/*").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR")
+
+                        .anyRequest().permitAll()
                 )
                 .logout(logout -> logout
                         .deleteCookies(sessionCookieName)
