@@ -1,7 +1,7 @@
 package br.tech.oe.plan.service;
 
-import br.tech.oe.plan.dto.CommentDTO;
-import br.tech.oe.plan.dto.CreateCommentDTO;
+import br.tech.oe.plan.dto.comment.CommentDTO;
+import br.tech.oe.plan.dto.comment.CreateCommentDTO;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

@@ -1,8 +1,8 @@
 package br.tech.oe.plan.service.impl;
 
-import br.tech.oe.plan.dto.GroupDTO;
-import br.tech.oe.plan.dto.mappers.GroupMapper;
+import br.tech.oe.plan.dto.group.GroupDTO;
 import br.tech.oe.plan.exception.ItemNotFoundException;
+import br.tech.oe.plan.mapper.GroupMapper;
 import br.tech.oe.plan.model.GroupModel;
 import br.tech.oe.plan.model.UserModel;
 import br.tech.oe.plan.repository.GroupRepository;

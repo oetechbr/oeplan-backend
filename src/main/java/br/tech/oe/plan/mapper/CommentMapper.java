@@ -1,7 +1,7 @@
-package br.tech.oe.plan.dto.mappers;
+package br.tech.oe.plan.mapper;
 
-import br.tech.oe.plan.dto.CommentDTO;
-import br.tech.oe.plan.dto.UserCommentDTO;
+import br.tech.oe.plan.dto.comment.CommentDTO;
+import br.tech.oe.plan.dto.comment.UserCommentDTO;
 import br.tech.oe.plan.model.CommentModel;
 import br.tech.oe.plan.model.UserModel;
 

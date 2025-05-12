@@ -1,6 +1,6 @@
-package br.tech.oe.plan.dto.mappers;
+package br.tech.oe.plan.mapper;
 
-import br.tech.oe.plan.dto.GroupDTO;
+import br.tech.oe.plan.dto.group.GroupDTO;
 import br.tech.oe.plan.model.GroupModel;
 
 import java.util.List;

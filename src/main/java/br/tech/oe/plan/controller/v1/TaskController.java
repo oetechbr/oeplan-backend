@@ -2,9 +2,9 @@ package br.tech.oe.plan.controller.v1;
 
 import br.tech.oe.plan.controller.v1.interfaces.BaseController;
 import br.tech.oe.plan.controller.v1.interfaces.CommentController;
-import br.tech.oe.plan.dto.CommentDTO;
-import br.tech.oe.plan.dto.CreateCommentDTO;
-import br.tech.oe.plan.dto.TaskDTO;
+import br.tech.oe.plan.dto.comment.CommentDTO;
+import br.tech.oe.plan.dto.comment.CreateCommentDTO;
+import br.tech.oe.plan.dto.task.TaskDTO;
 import br.tech.oe.plan.service.CommentService;
 import br.tech.oe.plan.service.TaskService;
 import jakarta.servlet.http.HttpSession;

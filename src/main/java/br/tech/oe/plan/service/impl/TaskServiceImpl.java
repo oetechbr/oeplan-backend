@@ -1,8 +1,8 @@
 package br.tech.oe.plan.service.impl;
 
-import br.tech.oe.plan.dto.TaskDTO;
-import br.tech.oe.plan.dto.mappers.TaskMapper;
+import br.tech.oe.plan.dto.task.TaskDTO;
 import br.tech.oe.plan.exception.ItemNotFoundException;
+import br.tech.oe.plan.mapper.TaskMapper;
 import br.tech.oe.plan.model.TaskModel;
 import br.tech.oe.plan.repository.TaskRepository;
 import br.tech.oe.plan.service.TaskService;

@@ -1,4 +1,4 @@
-package br.tech.oe.plan.dto;
+package br.tech.oe.plan.dto.comment;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

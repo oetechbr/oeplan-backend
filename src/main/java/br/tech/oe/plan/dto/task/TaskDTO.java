@@ -1,4 +1,6 @@
-package br.tech.oe.plan.dto;
+package br.tech.oe.plan.dto.task;
+
+import br.tech.oe.plan.dto.BaseDTO;
 
 import java.time.Instant;
 import java.time.LocalDateTime;

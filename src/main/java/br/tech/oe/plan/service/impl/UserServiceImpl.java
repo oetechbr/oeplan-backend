@@ -1,8 +1,8 @@
 package br.tech.oe.plan.service.impl;
 
-import br.tech.oe.plan.dto.mappers.UserMapper;
 import br.tech.oe.plan.dto.user.UserDTO;
 import br.tech.oe.plan.exception.ItemNotFoundException;
+import br.tech.oe.plan.mapper.UserMapper;
 import br.tech.oe.plan.repository.UserRepository;
 import br.tech.oe.plan.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

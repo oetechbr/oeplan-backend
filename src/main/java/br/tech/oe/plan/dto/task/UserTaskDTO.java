@@ -1,4 +1,4 @@
-package br.tech.oe.plan.dto;
+package br.tech.oe.plan.dto.task;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

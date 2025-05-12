@@ -2,7 +2,7 @@ package br.tech.oe.plan.dto.user;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class UserLoginDTO {
+public class LoginUserDTO {
     @NotBlank
     private String username;
 

@@ -1,7 +1,7 @@
-package br.tech.oe.plan.dto.mappers;
+package br.tech.oe.plan.mapper;
 
+import br.tech.oe.plan.dto.user.RegisterUserDTO;
 import br.tech.oe.plan.dto.user.UserDTO;
-import br.tech.oe.plan.dto.user.UserRegisterDTO;
 import br.tech.oe.plan.model.UserModel;
 
 import java.util.List;
@@ -35,7 +35,7 @@ public class UserMapper {
                 .collect(Collectors.toList());
     }
 
-    public static UserModel fromRegisterDTO(UserRegisterDTO registerDTO) {
+    public static UserModel fromRegisterDTO(RegisterUserDTO registerDTO) {
         UserModel model = new UserModel();
         model.setUsername(registerDTO.getUsername());
         model.setFirstName(registerDTO.getFirstName());

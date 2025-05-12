@@ -1,11 +1,11 @@
 package br.tech.oe.plan.controller.v1;
 
-import br.tech.oe.plan.dto.mappers.UserMapper;
+import br.tech.oe.plan.dto.user.LoginUserDTO;
+import br.tech.oe.plan.dto.user.RegisterUserDTO;
 import br.tech.oe.plan.dto.user.UserDTO;
-import br.tech.oe.plan.dto.user.UserLoginDTO;
-import br.tech.oe.plan.dto.user.UserRegisterDTO;
 import br.tech.oe.plan.exception.ItemAlreadyExistException;
 import br.tech.oe.plan.exception.NotAuthenticatedException;
+import br.tech.oe.plan.mapper.UserMapper;
 import br.tech.oe.plan.model.UserModel;
 import br.tech.oe.plan.service.impl.AuthServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
@@ -44,7 +44,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserDTO> register(@RequestBody @Valid UserRegisterDTO user, HttpServletRequest request) {
+    public ResponseEntity<UserDTO> register(@RequestBody @Valid RegisterUserDTO user, HttpServletRequest request) {
         if (request.getSession(false) != null) {
             throw new ItemAlreadyExistException(
                     "An active session already exists. You need to log out first."
@@ -57,7 +57,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(
-            @RequestBody @Valid UserLoginDTO userLogin,
+            @RequestBody @Valid LoginUserDTO userLogin,
             HttpServletRequest request,
             HttpServletResponse response
     ) {

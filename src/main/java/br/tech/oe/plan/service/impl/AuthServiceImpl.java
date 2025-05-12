@@ -1,10 +1,10 @@
 package br.tech.oe.plan.service.impl;
 
-import br.tech.oe.plan.dto.mappers.UserMapper;
+import br.tech.oe.plan.dto.user.RegisterUserDTO;
 import br.tech.oe.plan.dto.user.UserDTO;
-import br.tech.oe.plan.dto.user.UserRegisterDTO;
 import br.tech.oe.plan.exception.ItemAlreadyExistException;
 import br.tech.oe.plan.exception.ItemNotFoundException;
+import br.tech.oe.plan.mapper.UserMapper;
 import br.tech.oe.plan.model.UserModel;
 import br.tech.oe.plan.model.UserRoleModel;
 import br.tech.oe.plan.model.UserStatusModel;
@@ -41,7 +41,7 @@ public class AuthServiceImpl implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public UserDTO save(UserRegisterDTO request) {
+    public UserDTO save(RegisterUserDTO request) {
         if (userRepository.findByUsername(request.getUsername()) != null) {
             throw new ItemAlreadyExistException("Username already exist");
         }

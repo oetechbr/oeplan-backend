@@ -1,7 +1,7 @@
-package br.tech.oe.plan.dto.mappers;
+package br.tech.oe.plan.mapper;
 
-import br.tech.oe.plan.dto.TaskDTO;
-import br.tech.oe.plan.dto.UserTaskDTO;
+import br.tech.oe.plan.dto.task.TaskDTO;
+import br.tech.oe.plan.dto.task.UserTaskDTO;
 import br.tech.oe.plan.model.TaskModel;
 import br.tech.oe.plan.model.UserModel;
 

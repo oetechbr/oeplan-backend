@@ -1,4 +1,6 @@
-package br.tech.oe.plan.dto;
+package br.tech.oe.plan.dto.comment;
+
+import br.tech.oe.plan.dto.BaseDTO;
 
 import java.util.UUID;
 
