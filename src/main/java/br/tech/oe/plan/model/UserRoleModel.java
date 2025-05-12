@@ -18,7 +18,7 @@ public class UserRoleModel implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(unique = true, nullable = false)
-    private UserRole role;
+    private UserRole value;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -32,12 +32,12 @@ public class UserRoleModel implements Serializable {
         this.id = id;
     }
 
-    public UserRole getRole() {
-        return role;
+    public UserRole getValue() {
+        return value;
     }
 
-    public void setRole(UserRole role) {
-        this.role = role;
+    public void setValue(UserRole value) {
+        this.value = value;
     }
 
     public Instant getCreatedAt() {

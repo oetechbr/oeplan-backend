@@ -17,9 +17,9 @@ public class TaskMapper {
         dto.setDueDate(model.getDueDate());
         dto.setAssignedTo(toUserTaskDTO(model.getAssignedTo()));
         dto.setAssignedBy(toUserTaskDTO(model.getAssignedBy()));
-        dto.setStatusId(model.getStatus().getStatus().name());
-        dto.setPriorityId(model.getPriority().getPriority().name());
-        dto.setVisibilityId(model.getVisibility().getVisibility().name());
+        dto.setStatusId(model.getStatus().getValue().name());
+        dto.setPriorityId(model.getPriority().getValue().name());
+        dto.setVisibilityId(model.getVisibility().getValue().name());
         dto.setTags(model.getTags());
         dto.setArchivedAt(model.getArchivedAt());
         dto.setCompletedAt(model.getCompletedAt());

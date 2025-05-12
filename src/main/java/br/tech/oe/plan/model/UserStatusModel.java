@@ -18,7 +18,7 @@ public class UserStatusModel implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(unique = true, nullable = false)
-    private UserStatus status;
+    private UserStatus value;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -32,12 +32,12 @@ public class UserStatusModel implements Serializable {
         this.id = id;
     }
 
-    public UserStatus getStatus() {
-        return status;
+    public UserStatus getValue() {
+        return value;
     }
 
-    public void setStatus(UserStatus status) {
-        this.status = status;
+    public void setValue(UserStatus value) {
+        this.value = value;
     }
 
     public Instant getCreatedAt() {

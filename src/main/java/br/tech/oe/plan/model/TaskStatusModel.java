@@ -18,7 +18,7 @@ public class TaskStatusModel implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(unique = true, nullable = false)
-    private TaskStatus status;
+    private TaskStatus value;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -32,12 +32,12 @@ public class TaskStatusModel implements Serializable {
         this.id = id;
     }
 
-    public TaskStatus getStatus() {
-        return status;
+    public TaskStatus getValue() {
+        return value;
     }
 
-    public void setStatus(TaskStatus status) {
-        this.status = status;
+    public void setValue(TaskStatus value) {
+        this.value = value;
     }
 
     public Instant getCreatedAt() {

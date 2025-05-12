@@ -18,7 +18,7 @@ public class TaskVisibilityModel implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(unique = true, nullable = false)
-    private TaskVisibility visibility;
+    private TaskVisibility value;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -32,12 +32,12 @@ public class TaskVisibilityModel implements Serializable {
         this.id = id;
     }
 
-    public TaskVisibility getVisibility() {
-        return visibility;
+    public TaskVisibility getValue() {
+        return value;
     }
 
-    public void setVisibility(TaskVisibility visibility) {
-        this.visibility = visibility;
+    public void setValue(TaskVisibility value) {
+        this.value = value;
     }
 
     public Instant getCreatedAt() {

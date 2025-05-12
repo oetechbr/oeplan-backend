@@ -15,8 +15,8 @@ public class UserMapper {
         dto.setFirstName(model.getFirstName());
         dto.setLastName(model.getLastName());
         dto.setEmail(model.getEmail());
-        dto.setRole(model.getRole().getRole().name());
-        dto.setStatus(model.getStatus().getStatus().name());
+        dto.setRole(model.getRole().getValue().name());
+        dto.setStatus(model.getStatus().getValue().name());
         dto.setProfilePicture(model.getProfilePicture());
         dto.setPhone(model.getPhone());
         dto.setGender(model.getGender());

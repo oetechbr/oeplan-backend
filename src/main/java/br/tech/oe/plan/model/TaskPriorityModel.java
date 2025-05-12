@@ -18,7 +18,7 @@ public class TaskPriorityModel implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(unique = true, nullable = false)
-    private TaskPriority priority;
+    private TaskPriority value;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -32,12 +32,12 @@ public class TaskPriorityModel implements Serializable {
         this.id = id;
     }
 
-    public TaskPriority getPriority() {
-        return priority;
+    public TaskPriority getValue() {
+        return value;
     }
 
-    public void setPriority(TaskPriority priority) {
-        this.priority = priority;
+    public void setValue(TaskPriority value) {
+        this.value = value;
     }
 
     public Instant getCreatedAt() {
