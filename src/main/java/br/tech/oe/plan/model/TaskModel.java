@@ -32,20 +32,50 @@ public class TaskModel {
     @Column(nullable = false)
     private LocalDateTime dueDate;
 
-    @Column(nullable = false)
-    private Long assignedTo;
+    @ManyToOne
+    @JoinColumn(
+            name = "assigned_to",
+            referencedColumnName = "uuid",
+            foreignKey = @ForeignKey(name = "fk_tasks_assigned_to")
+    )
+    @OnDelete(action = OnDeleteAction.SET_NULL)
+    private UserModel assignedTo;
 
-    @Column(nullable = false)
-    private Long assignedBy;
+    @ManyToOne
+    @JoinColumn(
+            name = "assigned_by",
+            referencedColumnName = "uuid",
+            foreignKey = @ForeignKey(name = "fk_tasks_assigned_by")
+    )
+    @OnDelete(action = OnDeleteAction.SET_NULL)
+    private UserModel assignedBy;
 
-    @Column(nullable = false)
-    private Long statusId;
+    @ManyToOne(optional = false)
+    @JoinColumn(
+            name = "status_id",
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "fk_tasks_status_id"),
+            nullable = false
+    )
+    private TaskStatusModel status;
 
-    @Column(nullable = false)
-    private Long priorityId;
+    @ManyToOne(optional = false)
+    @JoinColumn(
+            name = "priority_id",
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "fk_tasks_priority_id"),
+            nullable = false
+    )
+    private TaskPriorityModel priority;
 
-    @Column(nullable = false)
-    private Long visibilityId;
+    @ManyToOne(optional = false)
+    @JoinColumn(
+            name = "visibility_id",
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "fk_tasks_visibility_id"),
+            nullable = false
+    )
+    private TaskVisibilityModel visibility;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
@@ -113,44 +143,52 @@ public class TaskModel {
         this.dueDate = dueDate;
     }
 
-    public Long getAssignedTo() {
+    public UserModel getAssignedTo() {
         return assignedTo;
     }
 
-    public void setAssignedTo(Long assignedTo) {
+    public void setAssignedTo(UserModel assignedTo) {
         this.assignedTo = assignedTo;
     }
 
-    public Long getAssignedBy() {
+    public UserModel getAssignedBy() {
         return assignedBy;
     }
 
-    public void setAssignedBy(Long assignedBy) {
+    public void setAssignedBy(UserModel assignedBy) {
         this.assignedBy = assignedBy;
     }
 
-    public Long getStatusId() {
-        return statusId;
+    public TaskStatusModel getStatus() {
+        return status;
     }
 
-    public void setStatusId(Long statusId) {
-        this.statusId = statusId;
+    public void setStatus(TaskStatusModel status) {
+        this.status = status;
     }
 
-    public Long getPriorityId() {
-        return priorityId;
+    public TaskPriorityModel getPriority() {
+        return priority;
     }
 
-    public void setPriorityId(Long priorityId) {
-        this.priorityId = priorityId;
+    public void setPriority(TaskPriorityModel priority) {
+        this.priority = priority;
     }
 
-    public Long getVisibilityId() {
-        return visibilityId;
+    public TaskVisibilityModel getVisibility() {
+        return visibility;
     }
 
-    public void setVisibilityId(Long visibilityId) {
-        this.visibilityId = visibilityId;
+    public void setVisibility(TaskVisibilityModel visibility) {
+        this.visibility = visibility;
+    }
+
+    public GroupModel getGroup() {
+        return group;
+    }
+
+    public void setGroup(GroupModel group) {
+        this.group = group;
     }
 
     public List<String> getTags() {
