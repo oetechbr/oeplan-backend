@@ -3,31 +3,19 @@ package br.tech.oe.plan.dto;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
-public class TaskDTO {
-    private UUID uuid;
+public class TaskDTO extends BaseDTO {
     private String title;
     private String description;
     private LocalDateTime dueDate;
-    private Long assignedTo;
-    private Long assignedBy;
-    private Long statusId;
-    private Long priorityId;
-    private Long visibilityId;
+    private UserTaskDTO assignedTo;
+    private UserTaskDTO assignedBy;
+    private String statusId;
+    private String priorityId;
+    private String visibilityId;
     private List<String> tags;
     private Instant archivedAt;
     private Instant completedAt;
-    private Instant createdAt;
-    private Instant updatedAt;
-
-    public UUID getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
-    }
 
     public String getTitle() {
         return title;
@@ -53,43 +41,43 @@ public class TaskDTO {
         this.dueDate = dueDate;
     }
 
-    public Long getAssignedTo() {
+    public UserTaskDTO getAssignedTo() {
         return assignedTo;
     }
 
-    public void setAssignedTo(Long assignedTo) {
+    public void setAssignedTo(UserTaskDTO assignedTo) {
         this.assignedTo = assignedTo;
     }
 
-    public Long getAssignedBy() {
+    public UserTaskDTO getAssignedBy() {
         return assignedBy;
     }
 
-    public void setAssignedBy(Long assignedBy) {
+    public void setAssignedBy(UserTaskDTO assignedBy) {
         this.assignedBy = assignedBy;
     }
 
-    public Long getStatusId() {
+    public String getStatusId() {
         return statusId;
     }
 
-    public void setStatusId(Long statusId) {
+    public void setStatusId(String statusId) {
         this.statusId = statusId;
     }
 
-    public Long getPriorityId() {
+    public String getPriorityId() {
         return priorityId;
     }
 
-    public void setPriorityId(Long priorityId) {
+    public void setPriorityId(String priorityId) {
         this.priorityId = priorityId;
     }
 
-    public Long getVisibilityId() {
+    public String getVisibilityId() {
         return visibilityId;
     }
 
-    public void setVisibilityId(Long visibilityId) {
+    public void setVisibilityId(String visibilityId) {
         this.visibilityId = visibilityId;
     }
 
@@ -115,21 +103,5 @@ public class TaskDTO {
 
     public void setCompletedAt(Instant completedAt) {
         this.completedAt = completedAt;
-    }
-
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Instant getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Instant updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }

@@ -74,12 +74,15 @@ public class AuthController {
         securityContext.setAuthentication(authentication);
         httpSessionSecurityContextRepository.saveContext(securityContext, request, response);
 
-        // Generate new session
-        var session = request.getSession(true);
-        session.setAttribute("username", userLogin.getUsername());
-
         var user = (UserModel) authentication.getPrincipal();
         var dto = UserMapper.toDTO(user);
+
+        // Generate new session
+        var session = request.getSession(true);
+        session.setAttribute("uuid", user.getUuid());
+        session.setAttribute("username", user.getUsername());
+        session.setAttribute("role", user.getRole().getRole().name());
+
         return ResponseEntity.ok(dto);
     }
 
@@ -93,7 +96,6 @@ public class AuthController {
     @GetMapping("/me")
     public ResponseEntity<?> me(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-
         if (session == null) {
             throw new NotAuthenticatedException("No active session found");
         }

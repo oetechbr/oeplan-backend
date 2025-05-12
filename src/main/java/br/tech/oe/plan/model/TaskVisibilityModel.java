@@ -1,6 +1,6 @@
 package br.tech.oe.plan.model;
 
-import br.tech.oe.plan.enums.UserStatus;
+import br.tech.oe.plan.enums.TaskVisibility;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -8,8 +8,8 @@ import java.io.Serializable;
 import java.time.Instant;
 
 @Entity
-@Table(name = "user_statuses")
-public class UserStatusModel implements Serializable {
+@Table(name = "task_visibilities")
+public class TaskVisibilityModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +18,7 @@ public class UserStatusModel implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(unique = true, nullable = false)
-    private UserStatus status;
+    private TaskVisibility visibility;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -32,12 +32,12 @@ public class UserStatusModel implements Serializable {
         this.id = id;
     }
 
-    public UserStatus getStatus() {
-        return status;
+    public TaskVisibility getVisibility() {
+        return visibility;
     }
 
-    public void setStatus(UserStatus status) {
-        this.status = status;
+    public void setVisibility(TaskVisibility visibility) {
+        this.visibility = visibility;
     }
 
     public Instant getCreatedAt() {

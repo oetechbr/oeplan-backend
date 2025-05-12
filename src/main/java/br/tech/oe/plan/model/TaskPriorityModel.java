@@ -1,6 +1,6 @@
 package br.tech.oe.plan.model;
 
-import br.tech.oe.plan.enums.UserStatus;
+import br.tech.oe.plan.enums.TaskPriority;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -8,8 +8,8 @@ import java.io.Serializable;
 import java.time.Instant;
 
 @Entity
-@Table(name = "user_statuses")
-public class UserStatusModel implements Serializable {
+@Table(name = "task_priorities")
+public class TaskPriorityModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +18,7 @@ public class UserStatusModel implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(unique = true, nullable = false)
-    private UserStatus status;
+    private TaskPriority priority;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -32,12 +32,12 @@ public class UserStatusModel implements Serializable {
         this.id = id;
     }
 
-    public UserStatus getStatus() {
-        return status;
+    public TaskPriority getPriority() {
+        return priority;
     }
 
-    public void setStatus(UserStatus status) {
-        this.status = status;
+    public void setPriority(TaskPriority priority) {
+        this.priority = priority;
     }
 
     public Instant getCreatedAt() {
