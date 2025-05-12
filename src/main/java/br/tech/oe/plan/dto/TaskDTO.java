@@ -8,11 +8,11 @@ public class TaskDTO extends BaseDTO {
     private String title;
     private String description;
     private LocalDateTime dueDate;
-    private Long assignedTo;
-    private Long assignedBy;
-    private Long statusId;
-    private Long priorityId;
-    private Long visibilityId;
+    private UserTaskDTO assignedTo;
+    private UserTaskDTO assignedBy;
+    private String statusId;
+    private String priorityId;
+    private String visibilityId;
     private List<String> tags;
     private Instant archivedAt;
     private Instant completedAt;
@@ -41,43 +41,43 @@ public class TaskDTO extends BaseDTO {
         this.dueDate = dueDate;
     }
 
-    public Long getAssignedTo() {
+    public UserTaskDTO getAssignedTo() {
         return assignedTo;
     }
 
-    public void setAssignedTo(Long assignedTo) {
+    public void setAssignedTo(UserTaskDTO assignedTo) {
         this.assignedTo = assignedTo;
     }
 
-    public Long getAssignedBy() {
+    public UserTaskDTO getAssignedBy() {
         return assignedBy;
     }
 
-    public void setAssignedBy(Long assignedBy) {
+    public void setAssignedBy(UserTaskDTO assignedBy) {
         this.assignedBy = assignedBy;
     }
 
-    public Long getStatusId() {
+    public String getStatusId() {
         return statusId;
     }
 
-    public void setStatusId(Long statusId) {
+    public void setStatusId(String statusId) {
         this.statusId = statusId;
     }
 
-    public Long getPriorityId() {
+    public String getPriorityId() {
         return priorityId;
     }
 
-    public void setPriorityId(Long priorityId) {
+    public void setPriorityId(String priorityId) {
         this.priorityId = priorityId;
     }
 
-    public Long getVisibilityId() {
+    public String getVisibilityId() {
         return visibilityId;
     }
 
-    public void setVisibilityId(Long visibilityId) {
+    public void setVisibilityId(String visibilityId) {
         this.visibilityId = visibilityId;
     }
 
