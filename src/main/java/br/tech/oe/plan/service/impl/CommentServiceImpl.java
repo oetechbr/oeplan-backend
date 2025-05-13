@@ -9,7 +9,6 @@ import br.tech.oe.plan.model.CommentModel;
 import br.tech.oe.plan.model.user.UserModel;
 import br.tech.oe.plan.repository.CommentRepository;
 import br.tech.oe.plan.repository.TaskRepository;
-import br.tech.oe.plan.repository.UserRepository;
 import br.tech.oe.plan.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -24,18 +23,11 @@ public class CommentServiceImpl implements CommentService {
 
     private final CommentRepository commentRepository;
 
-    private final UserRepository userRepository;
-
     private final TaskRepository taskRepository;
 
     @Autowired
-    public CommentServiceImpl(
-            CommentRepository commentRepository,
-            UserRepository userRepository,
-            TaskRepository taskRepository
-    ) {
+    public CommentServiceImpl(CommentRepository commentRepository, TaskRepository taskRepository) {
         this.commentRepository = commentRepository;
-        this.userRepository = userRepository;
         this.taskRepository = taskRepository;
     }
 
@@ -66,15 +58,15 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentDTO save(CreateCommentDTO commentDto, UUID taskUuid) {
-        var user = userRepository.findById(commentDto.getUserId());
-        if (user.isEmpty()) throw new ItemNotFoundException("User doesn't exist");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        var user = (UserModel) authentication.getPrincipal();
 
         var task = taskRepository.findById(taskUuid);
         if (task.isEmpty()) throw new ItemNotFoundException("Task doesn't exist");
 
         var model = new CommentModel();
         model.setTask(task.get());
-        model.setUser(user.get());
+        model.setUser(user);
         model.setContent(commentDto.getContent());
         model.setVisible(commentDto.getIsVisible());
 
