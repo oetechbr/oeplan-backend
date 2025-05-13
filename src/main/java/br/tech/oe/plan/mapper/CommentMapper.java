@@ -3,7 +3,7 @@ package br.tech.oe.plan.mapper;
 import br.tech.oe.plan.dto.comment.CommentDTO;
 import br.tech.oe.plan.dto.comment.UserCommentDTO;
 import br.tech.oe.plan.model.CommentModel;
-import br.tech.oe.plan.model.UserModel;
+import br.tech.oe.plan.model.user.UserModel;
 
 import java.util.List;
 import java.util.stream.Collectors;

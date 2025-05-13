@@ -2,7 +2,7 @@ package br.tech.oe.plan.mapper;
 
 import br.tech.oe.plan.dto.user.RegisterUserDTO;
 import br.tech.oe.plan.dto.user.UserDTO;
-import br.tech.oe.plan.model.UserModel;
+import br.tech.oe.plan.model.user.UserModel;
 
 import java.util.List;
 import java.util.stream.Collectors;

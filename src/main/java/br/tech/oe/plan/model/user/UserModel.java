@@ -1,4 +1,4 @@
-package br.tech.oe.plan.model;
+package br.tech.oe.plan.model.user;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;

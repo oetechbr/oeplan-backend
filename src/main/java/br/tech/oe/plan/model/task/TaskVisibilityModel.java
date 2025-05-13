@@ -1,4 +1,4 @@
-package br.tech.oe.plan.model;
+package br.tech.oe.plan.model.task;
 
 import br.tech.oe.plan.enums.TaskVisibility;
 import jakarta.persistence.*;

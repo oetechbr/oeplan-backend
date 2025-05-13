@@ -1,5 +1,7 @@
-package br.tech.oe.plan.model;
+package br.tech.oe.plan.model.task;
 
+import br.tech.oe.plan.model.GroupModel;
+import br.tech.oe.plan.model.user.UserModel;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;

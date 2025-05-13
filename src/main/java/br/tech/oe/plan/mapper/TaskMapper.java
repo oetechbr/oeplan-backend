@@ -2,8 +2,8 @@ package br.tech.oe.plan.mapper;
 
 import br.tech.oe.plan.dto.task.TaskDTO;
 import br.tech.oe.plan.dto.task.UserTaskDTO;
-import br.tech.oe.plan.model.TaskModel;
-import br.tech.oe.plan.model.UserModel;
+import br.tech.oe.plan.model.task.TaskModel;
+import br.tech.oe.plan.model.user.UserModel;
 
 import java.util.List;
 import java.util.stream.Collectors;

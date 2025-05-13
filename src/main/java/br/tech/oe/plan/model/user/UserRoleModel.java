@@ -1,6 +1,6 @@
-package br.tech.oe.plan.model;
+package br.tech.oe.plan.model.user;
 
-import br.tech.oe.plan.enums.TaskStatus;
+import br.tech.oe.plan.enums.UserRole;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -8,8 +8,8 @@ import java.io.Serializable;
 import java.time.Instant;
 
 @Entity
-@Table(name = "task_statuses")
-public class TaskStatusModel implements Serializable {
+@Table(name = "user_roles")
+public class UserRoleModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +18,7 @@ public class TaskStatusModel implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @Column(unique = true, nullable = false)
-    private TaskStatus value;
+    private UserRole value;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -32,11 +32,11 @@ public class TaskStatusModel implements Serializable {
         this.id = id;
     }
 
-    public TaskStatus getValue() {
+    public UserRole getValue() {
         return value;
     }
 
-    public void setValue(TaskStatus value) {
+    public void setValue(UserRole value) {
         this.value = value;
     }
 
