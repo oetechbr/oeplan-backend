@@ -1,5 +1,6 @@
 package br.tech.oe.plan.controller.v1;
 
+import br.tech.oe.plan.dto.user.CreateUserInviteDTO;
 import br.tech.oe.plan.dto.user.LoginUserDTO;
 import br.tech.oe.plan.dto.user.RegisterUserDTO;
 import br.tech.oe.plan.dto.user.UserDTO;
@@ -109,5 +110,17 @@ public class AuthController {
         UserModel user = authService.loadUserByUsername(username);
         var dto = UserMapper.toDTO(user);
         return ResponseEntity.ok(dto);
+    }
+
+    @PostMapping("/invite-validate")
+    public ResponseEntity<Void> inviteValidate(@RequestParam String token) {
+        authService.validateUserInvite(token);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/invite-user")
+    public ResponseEntity<Void> inviteUser(@RequestBody @Valid CreateUserInviteDTO userInvite) {
+        authService.saveUserInvite(userInvite);
+        return ResponseEntity.ok().build();
     }
 }
