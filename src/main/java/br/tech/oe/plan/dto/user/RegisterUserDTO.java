@@ -1,5 +1,7 @@
 package br.tech.oe.plan.dto.user;
 
+import br.tech.oe.plan.enums.UserRole;
+import br.tech.oe.plan.enums.UserStatus;
 import br.tech.oe.plan.validation.constraints.Password;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -26,11 +28,11 @@ public class RegisterUserDTO {
     private String password;
 
     @NotNull
-    private Long roleId;
+    private UserRole role;
 
-    private Long statusId;
+    private UserStatus status = UserStatus.ACTIVE;
 
-    private String profilePicture;
+    private String avatarUrl;
 
     @NotNull
     private String phone;
@@ -89,28 +91,28 @@ public class RegisterUserDTO {
         this.password = password;
     }
 
-    public Long getRoleId() {
-        return roleId;
+    public UserRole getRole() {
+        return role;
     }
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 
-    public Long getStatusId() {
-        return statusId;
+    public UserStatus getStatus() {
+        return status;
     }
 
-    public void setStatusId(Long statusId) {
-        this.statusId = statusId;
+    public void setStatus(UserStatus status) {
+        this.status = status;
     }
 
-    public String getProfilePicture() {
-        return profilePicture;
+    public String getAvatarUrl() {
+        return avatarUrl;
     }
 
-    public void setProfilePicture(String profilePicture) {
-        this.profilePicture = profilePicture;
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 
     public String getPhone() {

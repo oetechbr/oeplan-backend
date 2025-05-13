@@ -11,7 +11,7 @@ public class UserDTO extends BaseDTO {
     private String email;
     private String role;
     private String status;
-    private String profilePicture;
+    private String avatarUrl;
     private String phone;
     private String gender;
     private LocalDateTime birthDate;
@@ -67,12 +67,12 @@ public class UserDTO extends BaseDTO {
         this.status = status;
     }
 
-    public String getProfilePicture() {
-        return profilePicture;
+    public String getAvatarUrl() {
+        return avatarUrl;
     }
 
-    public void setProfilePicture(String profilePicture) {
-        this.profilePicture = profilePicture;
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 
     public String getPhone() {

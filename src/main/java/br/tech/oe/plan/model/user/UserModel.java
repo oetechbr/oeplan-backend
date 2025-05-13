@@ -59,7 +59,7 @@ public class UserModel implements UserDetails {
     private UserStatusModel status;
 
     @Column
-    private String profilePicture;
+    private String avatarUrl;
 
     @Column
     private String phone;
@@ -165,12 +165,12 @@ public class UserModel implements UserDetails {
         this.status = status;
     }
 
-    public String getProfilePicture() {
-        return profilePicture;
+    public String getAvatarUrl() {
+        return avatarUrl;
     }
 
-    public void setProfilePicture(String profilePicture) {
-        this.profilePicture = profilePicture;
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 
     public String getPhone() {

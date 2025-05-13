@@ -33,7 +33,7 @@ public class CommentMapper {
         dto.setUsername(model.getUsername());
         dto.setFirstName(model.getFirstName());
         dto.setLastName(model.getLastName());
-        dto.setProfilePicture(model.getProfilePicture());
+        dto.setAvatarUrl(model.getAvatarUrl());
         return dto;
     }
 }

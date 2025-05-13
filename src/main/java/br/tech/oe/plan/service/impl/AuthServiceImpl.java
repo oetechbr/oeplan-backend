@@ -51,11 +51,11 @@ public class AuthServiceImpl implements UserDetailsService {
 
         UserModel newUser = UserMapper.fromRegisterDTO(request);
 
-        UserRoleModel role = userRoleRepository.findById(request.getRoleId())
+        UserRoleModel role = userRoleRepository.findById(request.getRole().getCode())
                 .orElseThrow(() -> new ItemNotFoundException("Invalid role"));
         newUser.setRole(role);
 
-        UserStatusModel status = userStatusRepository.findById(request.getStatusId())
+        UserStatusModel status = userStatusRepository.findById(request.getStatus().getCode())
                 .orElseThrow(() -> new ItemNotFoundException("Invalid status"));
         newUser.setStatus(status);
 

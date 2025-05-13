@@ -11,7 +11,7 @@ public class UserTaskDTO implements Serializable {
     private String username;
     private String firstName;
     private String lastName;
-    private String profilePicture;
+    private String avatarUrl;
 
     public UUID getUuid() {
         return uuid;
@@ -45,11 +45,11 @@ public class UserTaskDTO implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getProfilePicture() {
-        return profilePicture;
+    public String getAvatarUrl() {
+        return avatarUrl;
     }
 
-    public void setProfilePicture(String profilePicture) {
-        this.profilePicture = profilePicture;
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 }
