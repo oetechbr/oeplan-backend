@@ -1,10 +1,17 @@
 package br.tech.oe.plan.enums;
 
 public enum TaskStatus {
-    PENDING("pending"),
-    IN_PROGRESS("in_progress"),
-    DONE("done");
+    PENDING(1),
+    IN_PROGRESS(2),
+    DONE(3);
 
-    TaskStatus(String status) {
+    private final long code;
+
+    TaskStatus(long code) {
+        this.code = code;
+    }
+
+    public long getCode() {
+        return code;
     }
 }

@@ -1,10 +1,17 @@
 package br.tech.oe.plan.enums;
 
 public enum TaskPriority {
-    LOW("low"),
-    MEDIUM("medium"),
-    HIGH("high");
+    LOW(1),
+    MEDIUM(2),
+    HIGH(3);
 
-    TaskPriority(String status) {
+    private final long code;
+
+    TaskPriority(long code) {
+        this.code = code;
+    }
+
+    public long getCode() {
+        return code;
     }
 }

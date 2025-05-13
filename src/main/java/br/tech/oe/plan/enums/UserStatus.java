@@ -1,11 +1,18 @@
 package br.tech.oe.plan.enums;
 
 public enum UserStatus {
-    ACTIVE("active"),
-    INACTIVE("inactive"),
-    SUSPENDED("suspended"),
-    INVITED("invited");
+    ACTIVE(1),
+    INACTIVE(2),
+    SUSPENDED(3),
+    INVITED(4);
 
-    UserStatus(String status) {
+    private final long code;
+
+    UserStatus(long code) {
+        this.code = code;
+    }
+
+    public long getCode() {
+        return code;
     }
 }
