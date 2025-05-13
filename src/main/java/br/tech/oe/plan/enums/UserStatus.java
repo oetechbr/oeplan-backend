@@ -1,10 +1,11 @@
 package br.tech.oe.plan.enums;
 
 public enum UserStatus {
-    ACTIVE(1),
-    INACTIVE(2),
-    SUSPENDED(3),
-    INVITED(4);
+    ACTIVE(1), // Fully registered
+    INACTIVE(2), // User deactivated
+    SUSPENDED(3), // Temporarily blocked
+    INVITED(4), // User was invited but hasn't accepted
+    PENDING(5); // User was created but not invited
 
     private final long code;
 
