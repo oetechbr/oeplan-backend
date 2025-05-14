@@ -32,7 +32,7 @@ public class MappersConfig {
                 .setSkipNullEnabled(true)
                 .setPropertyCondition(Conditions.isNotNull())
                 .setDestinationNameTokenizer(NameTokenizers.UNDERSCORE)
-                .setMatchingStrategy(MatchingStrategies.LOOSE)
+                .setMatchingStrategy(MatchingStrategies.STRICT)
                 .setSourceNameTokenizer(NameTokenizers.UNDERSCORE);
         return modelMapper;
     }
