@@ -1,5 +1,6 @@
 package br.tech.oe.plan.mapper;
 
+import br.tech.oe.plan.dto.task.CreateTaskDTO;
 import br.tech.oe.plan.dto.task.TaskDTO;
 import br.tech.oe.plan.dto.task.UserTaskDTO;
 import br.tech.oe.plan.model.task.TaskModel;
@@ -17,9 +18,9 @@ public class TaskMapper {
         dto.setDueDate(model.getDueDate());
         dto.setAssignedTo(toUserTaskDTO(model.getAssignedTo()));
         dto.setAssignedBy(toUserTaskDTO(model.getAssignedBy()));
-        dto.setStatusId(model.getStatus().getValue().name());
-        dto.setPriorityId(model.getPriority().getValue().name());
-        dto.setVisibilityId(model.getVisibility().getValue().name());
+        dto.setStatus(model.getStatus().name());
+        dto.setPriority(model.getPriority().name());
+        dto.setVisibility(model.getVisibility().name());
         dto.setTags(model.getTags());
         dto.setArchivedAt(model.getArchivedAt());
         dto.setCompletedAt(model.getCompletedAt());
@@ -42,5 +43,17 @@ public class TaskMapper {
         dto.setLastName(model.getLastName());
         dto.setAvatarUrl(model.getAvatarUrl());
         return dto;
+    }
+
+    public static TaskModel fromDTO(CreateTaskDTO dto) {
+        TaskModel model = new TaskModel();
+        model.setTitle(dto.getTitle());
+        model.setDescription(dto.getDescription());
+        model.setDueDate(dto.getDueDate());
+        model.setStatus(dto.getStatus());
+        model.setPriority(dto.getPriority());
+        model.setVisibility(dto.getVisibility());
+        model.setTags(dto.getTags());
+        return model;
     }
 }

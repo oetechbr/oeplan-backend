@@ -3,14 +3,9 @@ package br.tech.oe.plan.service.impl;
 import br.tech.oe.plan.dto.user.RegisterUserDTO;
 import br.tech.oe.plan.dto.user.UserDTO;
 import br.tech.oe.plan.exception.ItemAlreadyExistException;
-import br.tech.oe.plan.exception.ItemNotFoundException;
 import br.tech.oe.plan.mapper.UserMapper;
 import br.tech.oe.plan.model.user.UserModel;
-import br.tech.oe.plan.model.user.UserRoleModel;
-import br.tech.oe.plan.model.user.UserStatusModel;
 import br.tech.oe.plan.repository.UserRepository;
-import br.tech.oe.plan.repository.UserRoleRepository;
-import br.tech.oe.plan.repository.UserStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,22 +17,11 @@ public class AuthServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    private final UserRoleRepository userRoleRepository;
-
-    private final UserStatusRepository userStatusRepository;
-
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AuthServiceImpl(
-            UserRepository userRepository,
-            UserRoleRepository userRoleRepository,
-            UserStatusRepository userStatusRepository,
-            PasswordEncoder passwordEncoder
-    ) {
+    public AuthServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        this.userRoleRepository = userRoleRepository;
-        this.userStatusRepository = userStatusRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -50,15 +34,6 @@ public class AuthServiceImpl implements UserDetailsService {
         request.setPassword(encryptedPass);
 
         UserModel newUser = UserMapper.fromRegisterDTO(request);
-
-        UserRoleModel role = userRoleRepository.findById(request.getRole().getCode())
-                .orElseThrow(() -> new ItemNotFoundException("Invalid role"));
-        newUser.setRole(role);
-
-        UserStatusModel status = userStatusRepository.findById(request.getStatus().getCode())
-                .orElseThrow(() -> new ItemNotFoundException("Invalid status"));
-        newUser.setStatus(status);
-
         var res = userRepository.save(newUser);
         return UserMapper.toDTO(res);
     }

@@ -1,5 +1,7 @@
 package br.tech.oe.plan.model.user;
 
+import br.tech.oe.plan.enums.UserRole;
+import br.tech.oe.plan.enums.UserStatus;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -40,23 +42,13 @@ public class UserModel implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(
-            name = "role_id",
-            referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "fk_users_role_id"),
-            nullable = false
-    )
-    private UserRoleModel role;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(
-            name = "status_id",
-            referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "fk_users_status_id"),
-            nullable = false
-    )
-    private UserStatusModel status;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
 
     @Column
     private String avatarUrl;
@@ -89,7 +81,7 @@ public class UserModel implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role.getValue().name()));
+        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role.name()));
     }
 
     @Override
@@ -149,19 +141,19 @@ public class UserModel implements UserDetails {
         this.password = password;
     }
 
-    public UserRoleModel getRole() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRole(UserRoleModel role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 
-    public UserStatusModel getStatus() {
+    public UserStatus getStatus() {
         return status;
     }
 
-    public void setStatus(UserStatusModel status) {
+    public void setStatus(UserStatus status) {
         this.status = status;
     }
 
