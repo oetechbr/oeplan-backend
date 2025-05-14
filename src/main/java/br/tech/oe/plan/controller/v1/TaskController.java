@@ -48,6 +48,12 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.CREATED).body(taskService.patch(uuid, task));
     }
 
+    @DeleteMapping("/{uuid}")
+    public ResponseEntity<Void> delete(@PathVariable UUID uuid) {
+        taskService.delete(uuid);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/{taskUuid}/comments")
     public ResponseEntity<List<CommentDTO>> findAllComments(@PathVariable UUID taskUuid) {
         return ResponseEntity.ok(commentService.findAll(taskUuid));

@@ -14,4 +14,6 @@ public interface TaskRepository extends JpaRepository<TaskModel, UUID> {
     @Override
     @EntityGraph(attributePaths = {"status", "priority", "visibility", "assignedBy", "assignedTo"})
     List<TaskModel> findAll();
+
+    Long deleteByUuid(UUID uuid);
 }

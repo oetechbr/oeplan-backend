@@ -4,6 +4,7 @@ import br.tech.oe.plan.dto.task.CreateTaskDTO;
 import br.tech.oe.plan.dto.task.TaskDTO;
 import br.tech.oe.plan.dto.task.UpdateTaskDTO;
 import br.tech.oe.plan.exception.BadRequestException;
+import br.tech.oe.plan.exception.InternalServerError;
 import br.tech.oe.plan.exception.ItemNotFoundException;
 import br.tech.oe.plan.mapper.TaskMapper;
 import br.tech.oe.plan.model.task.TaskModel;
@@ -92,5 +93,16 @@ public class TaskServiceImpl implements TaskService {
         modelMapper.map(patch, task);
         var updatedTask = taskRepository.save(task);
         return TaskMapper.toDTO(updatedTask);
+    }
+
+    @Override
+    public void delete(UUID uuid) {
+        taskRepository.findById(uuid).orElseThrow(
+                () -> new ItemNotFoundException("Task doesn't exist")
+        );
+
+        if (taskRepository.deleteByUuid(uuid) == 0) {
+            throw new InternalServerError("Couldn't delete task");
+        }
     }
 }
