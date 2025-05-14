@@ -1,11 +1,13 @@
 package br.tech.oe.plan.controller.v1;
 
+import br.tech.oe.plan.dto.group.CreateGroupDTO;
 import br.tech.oe.plan.dto.group.GroupDTO;
+import br.tech.oe.plan.dto.group.UpdateGroupDTO;
 import br.tech.oe.plan.service.GroupService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -26,8 +28,24 @@ public class GroupController {
     }
 
     @GetMapping("/{uuid}")
-    public ResponseEntity<GroupDTO> findById(UUID uuid) {
+    public ResponseEntity<GroupDTO> findById(@PathVariable UUID uuid) {
         return ResponseEntity.ok(groupService.findById(uuid));
+    }
+
+    @PostMapping
+    public ResponseEntity<GroupDTO> save(@RequestBody @Valid CreateGroupDTO task) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(groupService.save(task));
+    }
+
+    @PatchMapping("/{uuid}")
+    public ResponseEntity<GroupDTO> save(@PathVariable UUID uuid, @RequestBody @Valid UpdateGroupDTO task) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(groupService.patch(uuid, task));
+    }
+
+    @DeleteMapping("/{uuid}")
+    public ResponseEntity<Void> delete(@PathVariable UUID uuid) {
+        groupService.delete(uuid);
+        return ResponseEntity.noContent().build();
     }
 }
 
