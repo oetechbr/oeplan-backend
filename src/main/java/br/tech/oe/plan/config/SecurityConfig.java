@@ -43,12 +43,19 @@ public class SecurityConfig {
                         .configurationSource(corsConfigurationSource())
                 )
                 .authorizeHttpRequests(authorize -> authorize
+                        // Options HTTP
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
                         // Public routes
                         .requestMatchers(HttpMethod.GET, "/api/v1/ping", "/api/v1/").permitAll()
 
                         // Auth routes
-                        .requestMatchers(HttpMethod.POST, "/api/v1/auth/login", "/api/v1/auth/register").permitAll()
-                        .requestMatchers("/api/v1/auth/me", "/api/v1/auth/logout").authenticated()
+                        .requestMatchers(
+                                "/api/v1/auth/login",
+                                "/api/v1/auth/register",
+                                "/api/v1/auth/me",
+                                "/api/v1/auth/logout"
+                        ).permitAll()
 
                         // User routes (admin only)
                         .requestMatchers("/api/v1/users/**").hasRole("ADMIN")
@@ -73,6 +80,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PATCH, "/api/v1/groups/*").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR")
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/groups/*").hasAnyRole("ADMIN", "DIRECTOR", "COORDINATOR")
 
+                        // TODO(fix): something is wrong here
                         .anyRequest().permitAll()
                 )
                 .logout(logout -> logout
@@ -120,7 +128,8 @@ public class SecurityConfig {
         config.setAllowCredentials(true);
         config.setAllowedHeaders(List.of("Content-Type"));
         config.setAllowedOrigins(List.of(allowedOrigin));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedMethods(List.of("GET", "POST", "PATCH", "DELETE", "OPTIONS"));
+        config.setExposedHeaders(List.of("Set-Cookie"));
         source.registerCorsConfiguration("/**", config);
         return source;
     }

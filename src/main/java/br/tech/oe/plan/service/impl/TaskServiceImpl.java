@@ -52,7 +52,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public TaskDTO findById(UUID uuid) throws ItemNotFoundException {
+    public TaskDTO findById(UUID uuid) {
         var res = taskRepository.findById(uuid).orElseThrow(ItemNotFoundException::new);
         return TaskMapper.toDTO(res);
     }

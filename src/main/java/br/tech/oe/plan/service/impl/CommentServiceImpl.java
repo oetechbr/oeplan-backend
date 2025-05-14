@@ -51,13 +51,13 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public CommentDTO findById(UUID uuid) throws ItemNotFoundException {
+    public CommentDTO findById(UUID uuid) {
         var res = commentRepository.findById(uuid).orElseThrow(ItemNotFoundException::new);
         return CommentMapper.toDTO(res);
     }
 
     @Override
-    public CommentDTO save(CreateCommentDTO commentDto, UUID taskUuid) {
+    public CommentDTO save(UUID taskUuid, CreateCommentDTO commentDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         var user = (UserModel) authentication.getPrincipal();
 

@@ -35,7 +35,7 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public GroupDTO findById(UUID uuid) throws ItemNotFoundException {
+    public GroupDTO findById(UUID uuid) {
         GroupModel res = groupRepository.findById(uuid).orElseThrow(ItemNotFoundException::new);
         return GroupMapper.toDTO(res);
     }

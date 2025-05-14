@@ -1,10 +1,9 @@
 package br.tech.oe.plan.controller.v1;
 
-import br.tech.oe.plan.controller.v1.interfaces.BaseController;
 import br.tech.oe.plan.dto.group.GroupDTO;
 import br.tech.oe.plan.service.GroupService;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +12,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/groups")
-public class GroupController implements BaseController<GroupDTO> {
+public class GroupController {
 
     private final GroupService groupService;
 
@@ -21,12 +20,12 @@ public class GroupController implements BaseController<GroupDTO> {
         this.groupService = groupService;
     }
 
-    @Override
-    public ResponseEntity<List<GroupDTO>> findAll(HttpSession session) {
+    @GetMapping
+    public ResponseEntity<List<GroupDTO>> findAll() {
         return ResponseEntity.ok(groupService.findAll());
     }
 
-    @Override
+    @GetMapping("/{uuid}")
     public ResponseEntity<GroupDTO> findById(UUID uuid) {
         return ResponseEntity.ok(groupService.findById(uuid));
     }

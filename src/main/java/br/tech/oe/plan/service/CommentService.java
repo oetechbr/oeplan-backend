@@ -12,7 +12,7 @@ public interface CommentService extends BaseService<CommentDTO> {
 
     CommentDTO findById(UUID taskUuid, UUID uuid);
 
-    CommentDTO save(CreateCommentDTO commentDto, UUID taskUuid);
+    CommentDTO save(UUID taskUuid, CreateCommentDTO commentDto);
 
     @Transactional
     void delete(UUID commentUuid);

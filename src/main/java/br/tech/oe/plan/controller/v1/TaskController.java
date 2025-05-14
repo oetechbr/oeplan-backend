@@ -1,7 +1,5 @@
 package br.tech.oe.plan.controller.v1;
 
-import br.tech.oe.plan.controller.v1.interfaces.BaseController;
-import br.tech.oe.plan.controller.v1.interfaces.CommentController;
 import br.tech.oe.plan.dto.comment.CommentDTO;
 import br.tech.oe.plan.dto.comment.CreateCommentDTO;
 import br.tech.oe.plan.dto.task.CreateTaskDTO;
@@ -9,7 +7,6 @@ import br.tech.oe.plan.dto.task.TaskDTO;
 import br.tech.oe.plan.dto.task.UpdateTaskDTO;
 import br.tech.oe.plan.service.CommentService;
 import br.tech.oe.plan.service.TaskService;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +17,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/tasks")
-public class TaskController implements BaseController<TaskDTO>, CommentController {
+public class TaskController {
 
     private final TaskService taskService;
 
@@ -31,13 +28,13 @@ public class TaskController implements BaseController<TaskDTO>, CommentControlle
         this.commentService = commentService;
     }
 
-    @Override
-    public ResponseEntity<List<TaskDTO>> findAll(HttpSession session) {
+    @GetMapping
+    public ResponseEntity<List<TaskDTO>> findAll() {
         return ResponseEntity.ok(taskService.findAll());
     }
 
-    @Override
-    public ResponseEntity<TaskDTO> findById(UUID uuid) {
+    @GetMapping("/{uuid}")
+    public ResponseEntity<TaskDTO> findById(@PathVariable UUID uuid) {
         return ResponseEntity.ok(taskService.findById(uuid));
     }
 
@@ -51,22 +48,25 @@ public class TaskController implements BaseController<TaskDTO>, CommentControlle
         return ResponseEntity.status(HttpStatus.CREATED).body(taskService.patch(uuid, task));
     }
 
-    @Override
-    public ResponseEntity<List<CommentDTO>> findAllComments(UUID taskUuid) {
+    @GetMapping("/{taskUuid}/comments")
+    public ResponseEntity<List<CommentDTO>> findAllComments(@PathVariable UUID taskUuid) {
         return ResponseEntity.ok(commentService.findAll(taskUuid));
     }
 
-    @Override
-    public ResponseEntity<CommentDTO> findCommentById(UUID taskUuid, UUID uuid) {
+    @GetMapping("/{taskUuid}/comments/{uuid}")
+    public ResponseEntity<CommentDTO> findCommentById(@PathVariable UUID taskUuid, @PathVariable UUID uuid) {
         return ResponseEntity.ok(commentService.findById(taskUuid, uuid));
     }
 
-    @Override
-    public ResponseEntity<CommentDTO> saveComment(CreateCommentDTO commentDTO, UUID taskUuid) {
-        return ResponseEntity.ok(commentService.save(commentDTO, taskUuid));
+    @PostMapping("/{taskUuid}/comments")
+    public ResponseEntity<CommentDTO> saveComment(
+            @PathVariable UUID taskUuid,
+            @RequestBody @Valid CreateCommentDTO commentDTO
+    ) {
+        return ResponseEntity.ok(commentService.save(taskUuid, commentDTO));
     }
 
-    @Override
+    @DeleteMapping("/{taskUuid}/comments/{uuid}")
     public ResponseEntity<Void> deleteComment(UUID uuid) {
         commentService.delete(uuid);
         return ResponseEntity.noContent().build();

@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO findById(UUID uuid) throws ItemNotFoundException {
+    public UserDTO findById(UUID uuid) {
         var res = userRepository.findById(uuid).orElseThrow(ItemNotFoundException::new);
         return UserMapper.toDTO(res);
     }

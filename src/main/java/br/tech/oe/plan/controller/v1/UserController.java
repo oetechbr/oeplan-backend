@@ -1,10 +1,9 @@
 package br.tech.oe.plan.controller.v1;
 
-import br.tech.oe.plan.controller.v1.interfaces.BaseController;
 import br.tech.oe.plan.dto.user.UserDTO;
 import br.tech.oe.plan.service.UserService;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +13,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/users")
-public class UserController implements BaseController<UserDTO> {
+public class UserController {
 
     private final UserService userService;
 
@@ -22,12 +21,12 @@ public class UserController implements BaseController<UserDTO> {
         this.userService = userService;
     }
 
-    @Override
-    public ResponseEntity<List<UserDTO>> findAll(HttpSession session) {
+    @GetMapping
+    public ResponseEntity<List<UserDTO>> findAll() {
         return ResponseEntity.ok(userService.findAll());
     }
 
-    @Override
+    @GetMapping("/{uuid}")
     public ResponseEntity<UserDTO> findById(@PathVariable UUID uuid) {
         return ResponseEntity.ok(userService.findById(uuid));
     }
