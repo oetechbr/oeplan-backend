@@ -12,9 +12,9 @@ public class TaskDTO extends BaseDTO {
     private LocalDateTime dueDate;
     private UserTaskDTO assignedTo;
     private UserTaskDTO assignedBy;
-    private String statusId;
-    private String priorityId;
-    private String visibilityId;
+    private String status;
+    private String priority;
+    private String visibility;
     private List<String> tags;
     private Instant archivedAt;
     private Instant completedAt;
@@ -59,28 +59,28 @@ public class TaskDTO extends BaseDTO {
         this.assignedBy = assignedBy;
     }
 
-    public String getStatusId() {
-        return statusId;
+    public String getStatus() {
+        return status;
     }
 
-    public void setStatusId(String statusId) {
-        this.statusId = statusId;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getPriorityId() {
-        return priorityId;
+    public String getPriority() {
+        return priority;
     }
 
-    public void setPriorityId(String priorityId) {
-        this.priorityId = priorityId;
+    public void setPriority(String priority) {
+        this.priority = priority;
     }
 
-    public String getVisibilityId() {
-        return visibilityId;
+    public String getVisibility() {
+        return visibility;
     }
 
-    public void setVisibilityId(String visibilityId) {
-        this.visibilityId = visibilityId;
+    public void setVisibility(String visibility) {
+        this.visibility = visibility;
     }
 
     public List<String> getTags() {

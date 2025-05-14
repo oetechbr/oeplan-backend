@@ -1,5 +1,8 @@
 package br.tech.oe.plan.model.task;
 
+import br.tech.oe.plan.enums.TaskPriority;
+import br.tech.oe.plan.enums.TaskStatus;
+import br.tech.oe.plan.enums.TaskVisibility;
 import br.tech.oe.plan.model.GroupModel;
 import br.tech.oe.plan.model.user.UserModel;
 import jakarta.persistence.*;
@@ -28,10 +31,10 @@ public class TaskModel {
     @Column(nullable = false)
     private String title;
 
-    @Column
+    @Column(nullable = false)
     private String description;
 
-    @Column(nullable = false)
+    @Column
     private LocalDateTime dueDate;
 
     @ManyToOne
@@ -52,32 +55,17 @@ public class TaskModel {
     @OnDelete(action = OnDeleteAction.SET_NULL)
     private UserModel assignedBy;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(
-            name = "status_id",
-            referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "fk_tasks_status_id"),
-            nullable = false
-    )
-    private TaskStatusModel status;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TaskStatus status;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(
-            name = "priority_id",
-            referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "fk_tasks_priority_id"),
-            nullable = false
-    )
-    private TaskPriorityModel priority;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TaskPriority priority;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(
-            name = "visibility_id",
-            referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "fk_tasks_visibility_id"),
-            nullable = false
-    )
-    private TaskVisibilityModel visibility;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TaskVisibility visibility;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
@@ -161,27 +149,27 @@ public class TaskModel {
         this.assignedBy = assignedBy;
     }
 
-    public TaskStatusModel getStatus() {
+    public TaskStatus getStatus() {
         return status;
     }
 
-    public void setStatus(TaskStatusModel status) {
+    public void setStatus(TaskStatus status) {
         this.status = status;
     }
 
-    public TaskPriorityModel getPriority() {
+    public TaskPriority getPriority() {
         return priority;
     }
 
-    public void setPriority(TaskPriorityModel priority) {
+    public void setPriority(TaskPriority priority) {
         this.priority = priority;
     }
 
-    public TaskVisibilityModel getVisibility() {
+    public TaskVisibility getVisibility() {
         return visibility;
     }
 
-    public void setVisibility(TaskVisibilityModel visibility) {
+    public void setVisibility(TaskVisibility visibility) {
         this.visibility = visibility;
     }
 

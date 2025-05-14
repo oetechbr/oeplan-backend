@@ -81,7 +81,7 @@ public class AuthController {
         var session = request.getSession(true);
         session.setAttribute("uuid", user.getUuid());
         session.setAttribute("username", user.getUsername());
-        session.setAttribute("role", user.getRole().getValue().name());
+        session.setAttribute("role", user.getRole().name());
 
         return ResponseEntity.ok(dto);
     }
