@@ -3,7 +3,6 @@ package br.tech.oe.plan.controller.v1;
 import br.tech.oe.plan.controller.v1.interfaces.BaseController;
 import br.tech.oe.plan.dto.group.GroupDTO;
 import br.tech.oe.plan.service.GroupService;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +21,7 @@ public class GroupController implements BaseController<GroupDTO> {
     }
 
     @Override
-    public ResponseEntity<List<GroupDTO>> findAll(HttpSession session) {
+    public ResponseEntity<List<GroupDTO>> findAll() {
         return ResponseEntity.ok(groupService.findAll());
     }
 

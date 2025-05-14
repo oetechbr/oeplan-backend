@@ -3,7 +3,6 @@ package br.tech.oe.plan.controller.v1;
 import br.tech.oe.plan.controller.v1.interfaces.BaseController;
 import br.tech.oe.plan.dto.user.UserDTO;
 import br.tech.oe.plan.service.UserService;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +22,7 @@ public class UserController implements BaseController<UserDTO> {
     }
 
     @Override
-    public ResponseEntity<List<UserDTO>> findAll(HttpSession session) {
+    public ResponseEntity<List<UserDTO>> findAll() {
         return ResponseEntity.ok(userService.findAll());
     }
 

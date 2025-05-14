@@ -7,7 +7,6 @@ import br.tech.oe.plan.dto.comment.CreateCommentDTO;
 import br.tech.oe.plan.dto.task.TaskDTO;
 import br.tech.oe.plan.service.CommentService;
 import br.tech.oe.plan.service.TaskService;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,7 +28,7 @@ public class TaskController implements BaseController<TaskDTO>, CommentControlle
     }
 
     @Override
-    public ResponseEntity<List<TaskDTO>> findAll(HttpSession session) {
+    public ResponseEntity<List<TaskDTO>> findAll() {
         return ResponseEntity.ok(taskService.findAll());
     }
 
