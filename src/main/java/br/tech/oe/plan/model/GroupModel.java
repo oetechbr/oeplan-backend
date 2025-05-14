@@ -1,5 +1,6 @@
 package br.tech.oe.plan.model;
 
+import br.tech.oe.plan.enums.GroupVisibility;
 import br.tech.oe.plan.model.user.UserModel;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -42,9 +43,6 @@ public class GroupModel {
     @Column(unique = true)
     private String code;
 
-    @Column(nullable = false)
-    private String status;
-
     @Column(columnDefinition = "text[]")
     private List<String> tags;
 
@@ -54,11 +52,9 @@ public class GroupModel {
     @Column
     private String category;
 
-    @Column
-    private Long visibility;
-
-    @Column
-    private Long accessLevel;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private GroupVisibility visibility;
 
     @Column
     private Instant archivedAt;
@@ -119,14 +115,6 @@ public class GroupModel {
         this.code = code;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public List<String> getTags() {
         return tags;
     }
@@ -151,20 +139,12 @@ public class GroupModel {
         this.category = category;
     }
 
-    public Long getVisibility() {
+    public GroupVisibility getVisibility() {
         return visibility;
     }
 
-    public void setVisibility(Long visibility) {
+    public void setVisibility(GroupVisibility visibility) {
         this.visibility = visibility;
-    }
-
-    public Long getAccessLevel() {
-        return accessLevel;
-    }
-
-    public void setAccessLevel(Long accessLevel) {
-        this.accessLevel = accessLevel;
     }
 
     public Instant getArchivedAt() {

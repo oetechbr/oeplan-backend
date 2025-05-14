@@ -1,6 +1,7 @@
 package br.tech.oe.plan.dto.group;
 
 import br.tech.oe.plan.dto.BaseDTO;
+import br.tech.oe.plan.enums.GroupVisibility;
 
 import java.time.Instant;
 import java.util.List;
@@ -11,12 +12,10 @@ public class GroupDTO extends BaseDTO {
     private String title;
     private String description;
     private String code;
-    private String status;
     private List<String> tags;
     private String color;
     private String category;
-    private Long visibilityId;
-    private Long accessLevelId;
+    private GroupVisibility visibility;
     private Instant archivedAt;
 
     public UUID getOwnerUuid() {
@@ -51,14 +50,6 @@ public class GroupDTO extends BaseDTO {
         this.code = code;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public List<String> getTags() {
         return tags;
     }
@@ -83,20 +74,12 @@ public class GroupDTO extends BaseDTO {
         this.category = category;
     }
 
-    public Long getVisibilityId() {
-        return visibilityId;
+    public GroupVisibility getVisibility() {
+        return visibility;
     }
 
-    public void setVisibilityId(Long visibilityId) {
-        this.visibilityId = visibilityId;
-    }
-
-    public Long getAccessLevelId() {
-        return accessLevelId;
-    }
-
-    public void setAccessLevelId(Long accessLevelId) {
-        this.accessLevelId = accessLevelId;
+    public void setVisibility(GroupVisibility visibility) {
+        this.visibility = visibility;
     }
 
     public Instant getArchivedAt() {
