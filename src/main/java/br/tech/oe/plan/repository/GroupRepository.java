@@ -10,4 +10,6 @@ import java.util.UUID;
 @Repository
 public interface GroupRepository extends JpaRepository<GroupModel, UUID> {
     List<GroupModel> findAllByOwnerUuid(UUID userUuid);
+
+    Long deleteByUuid(UUID uuid);
 }

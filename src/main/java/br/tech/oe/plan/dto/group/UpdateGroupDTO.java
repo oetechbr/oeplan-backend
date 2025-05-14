@@ -1,21 +1,28 @@
 package br.tech.oe.plan.dto.group;
 
-import br.tech.oe.plan.dto.BaseDTO;
 import br.tech.oe.plan.enums.GroupVisibility;
 
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
-public class GroupDTO extends BaseDTO {
+public class UpdateGroupDTO {
     private UUID ownerUuid;
+
     private String title;
+
     private String description;
+
     private String code;
+
     private List<String> tags;
+
     private String color;
+
     private String category;
-    private GroupVisibility visibility;
+
+    private GroupVisibility visibility = GroupVisibility.PRIVATE;
+
     private Instant archivedAt;
 
     public UUID getOwnerUuid() {
