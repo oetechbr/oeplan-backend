@@ -4,7 +4,7 @@ import br.tech.oe.plan.dto.task.CreateTaskDTO;
 import br.tech.oe.plan.dto.task.TaskDTO;
 import br.tech.oe.plan.dto.task.UpdateTaskDTO;
 import br.tech.oe.plan.exception.BadRequestException;
-import br.tech.oe.plan.exception.InternalServerError;
+import br.tech.oe.plan.exception.InternalServerErrorException;
 import br.tech.oe.plan.exception.ItemNotFoundException;
 import br.tech.oe.plan.mapper.TaskMapper;
 import br.tech.oe.plan.model.task.TaskModel;
@@ -102,7 +102,7 @@ public class TaskServiceImpl implements TaskService {
         );
 
         if (taskRepository.deleteByUuid(uuid) == 0) {
-            throw new InternalServerError("Couldn't delete task");
+            throw new InternalServerErrorException("Couldn't delete task");
         }
     }
 }
