@@ -12,6 +12,7 @@ public class GroupDTO extends BaseDTO {
     private String title;
     private String description;
     private String code;
+    private String bannerUrl;
     private List<String> tags;
     private String color;
     private String category;
@@ -48,6 +49,14 @@ public class GroupDTO extends BaseDTO {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getBannerUrl() {
+        return bannerUrl;
+    }
+
+    public void setBannerUrl(String bannerUrl) {
+        this.bannerUrl = bannerUrl;
     }
 
     public List<String> getTags() {

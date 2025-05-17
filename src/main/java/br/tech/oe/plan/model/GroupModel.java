@@ -42,6 +42,9 @@ public class GroupModel {
     @Column(unique = true)
     private String code;
 
+    @Column
+    private String bannerUrl;
+
     @Column(columnDefinition = "text[]")
     private List<String> tags;
 
@@ -112,6 +115,14 @@ public class GroupModel {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getBannerUrl() {
+        return bannerUrl;
+    }
+
+    public void setBannerUrl(String bannerUrl) {
+        this.bannerUrl = bannerUrl;
     }
 
     public List<String> getTags() {

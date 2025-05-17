@@ -15,6 +15,8 @@ public class UpdateGroupDTO {
 
     private String code;
 
+    private String bannerUrl;
+
     private List<String> tags;
 
     private String color;
@@ -55,6 +57,14 @@ public class UpdateGroupDTO {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getBannerUrl() {
+        return bannerUrl;
+    }
+
+    public void setBannerUrl(String bannerUrl) {
+        this.bannerUrl = bannerUrl;
     }
 
     public List<String> getTags() {

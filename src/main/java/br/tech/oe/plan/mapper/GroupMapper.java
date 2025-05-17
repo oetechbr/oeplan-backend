@@ -16,6 +16,7 @@ public class GroupMapper {
         dto.setTitle(model.getTitle());
         dto.setDescription(model.getDescription());
         dto.setCode(model.getCode());
+        dto.setBannerUrl(model.getBannerUrl());
         dto.setTags(model.getTags());
         dto.setColor(model.getColor());
         dto.setCategory(model.getCategory());
@@ -37,6 +38,7 @@ public class GroupMapper {
         model.setTitle(dto.getTitle());
         model.setDescription(dto.getDescription());
         model.setCode(dto.getCode());
+        model.setBannerUrl(dto.getBannerUrl());
         model.setTags(dto.getTags());
         model.setColor(dto.getColor());
         model.setCategory(dto.getCategory());
