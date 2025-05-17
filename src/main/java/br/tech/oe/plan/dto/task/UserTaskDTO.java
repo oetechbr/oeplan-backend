@@ -11,6 +11,7 @@ public class UserTaskDTO implements Serializable {
     private String username;
     private String firstName;
     private String lastName;
+    private String email;
     private String avatarUrl;
 
     public UUID getUuid() {
@@ -43,6 +44,14 @@ public class UserTaskDTO implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getAvatarUrl() {
