@@ -4,7 +4,7 @@ import br.tech.oe.plan.dto.user.RegisterUserDTO;
 import br.tech.oe.plan.dto.user.UserDTO;
 import br.tech.oe.plan.exception.ItemAlreadyExistException;
 import br.tech.oe.plan.mapper.UserMapper;
-import br.tech.oe.plan.model.user.UserModel;
+import br.tech.oe.plan.model.UserModel;
 import br.tech.oe.plan.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;

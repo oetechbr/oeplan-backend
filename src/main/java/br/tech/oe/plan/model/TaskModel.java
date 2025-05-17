@@ -1,10 +1,8 @@
-package br.tech.oe.plan.model.task;
+package br.tech.oe.plan.model;
 
 import br.tech.oe.plan.enums.TaskPriority;
 import br.tech.oe.plan.enums.TaskStatus;
 import br.tech.oe.plan.enums.TaskVisibility;
-import br.tech.oe.plan.model.GroupModel;
-import br.tech.oe.plan.model.user.UserModel;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;

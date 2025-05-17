@@ -1,4 +1,4 @@
-package br.tech.oe.plan.model.user;
+package br.tech.oe.plan.model;
 
 import br.tech.oe.plan.enums.UserRole;
 import br.tech.oe.plan.enums.UserStatus;

@@ -6,7 +6,7 @@ import br.tech.oe.plan.exception.ForbiddenException;
 import br.tech.oe.plan.exception.ItemNotFoundException;
 import br.tech.oe.plan.mapper.CommentMapper;
 import br.tech.oe.plan.model.CommentModel;
-import br.tech.oe.plan.model.user.UserModel;
+import br.tech.oe.plan.model.UserModel;
 import br.tech.oe.plan.repository.CommentRepository;
 import br.tech.oe.plan.repository.TaskRepository;
 import br.tech.oe.plan.service.CommentService;

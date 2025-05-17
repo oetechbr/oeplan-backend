@@ -7,7 +7,7 @@ import br.tech.oe.plan.exception.InternalServerErrorException;
 import br.tech.oe.plan.exception.ItemNotFoundException;
 import br.tech.oe.plan.mapper.GroupMapper;
 import br.tech.oe.plan.model.GroupModel;
-import br.tech.oe.plan.model.user.UserModel;
+import br.tech.oe.plan.model.UserModel;
 import br.tech.oe.plan.repository.GroupRepository;
 import br.tech.oe.plan.repository.UserRepository;
 import br.tech.oe.plan.service.GroupService;

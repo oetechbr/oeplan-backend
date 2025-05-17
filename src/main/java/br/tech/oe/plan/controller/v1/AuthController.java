@@ -6,7 +6,7 @@ import br.tech.oe.plan.dto.user.UserDTO;
 import br.tech.oe.plan.exception.ItemAlreadyExistException;
 import br.tech.oe.plan.exception.NotAuthenticatedException;
 import br.tech.oe.plan.mapper.UserMapper;
-import br.tech.oe.plan.model.user.UserModel;
+import br.tech.oe.plan.model.UserModel;
 import br.tech.oe.plan.service.impl.AuthServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
