@@ -1,5 +1,6 @@
 package br.tech.oe.plan.mapper;
 
+import br.tech.oe.plan.dto.user.CreateUserDTO;
 import br.tech.oe.plan.dto.user.RegisterUserDTO;
 import br.tech.oe.plan.dto.user.UserDTO;
 import br.tech.oe.plan.model.UserModel;
@@ -35,22 +36,32 @@ public class UserMapper {
                 .collect(Collectors.toList());
     }
 
-    public static UserModel fromRegisterDTO(RegisterUserDTO registerDTO) {
+    public static UserModel fromRegisterDTO(RegisterUserDTO dto) {
         UserModel model = new UserModel();
-        model.setUsername(registerDTO.getUsername());
-        model.setFirstName(registerDTO.getFirstName());
-        model.setLastName(registerDTO.getLastName());
-        model.setPassword(registerDTO.getPassword());
-        model.setEmail(registerDTO.getEmail());
-        model.setRole(registerDTO.getRole());
-        model.setStatus(registerDTO.getStatus());
-        model.setAvatarUrl(registerDTO.getAvatarUrl());
-        model.setPhone(registerDTO.getPhone());
-        model.setGender(registerDTO.getGender());
-        model.setBirthDate(registerDTO.getBirthDate());
-        model.setDepartment(registerDTO.getDepartment());
-        model.setTitlePosition(registerDTO.getTitlePosition());
-        model.setEmailVerified(registerDTO.isEmailVerified());
+        model.setUsername(dto.getUsername());
+        model.setFirstName(dto.getFirstName());
+        model.setLastName(dto.getLastName());
+        model.setPassword(dto.getPassword());
+        model.setEmail(dto.getEmail());
+        model.setRole(dto.getRole());
+        model.setStatus(dto.getStatus());
+        model.setAvatarUrl(dto.getAvatarUrl());
+        model.setPhone(dto.getPhone());
+        model.setGender(dto.getGender());
+        model.setBirthDate(dto.getBirthDate());
+        model.setDepartment(dto.getDepartment());
+        model.setTitlePosition(dto.getTitlePosition());
+        model.setEmailVerified(dto.isEmailVerified());
+        return model;
+    }
+
+    public static UserModel fromCreateDTO(CreateUserDTO dto) {
+        UserModel model = new UserModel();
+        model.setUsername(dto.getUsername());
+        model.setFirstName(dto.getFirstName());
+        model.setLastName(dto.getLastName());
+        model.setEmail(dto.getEmail());
+        model.setRole(dto.getRole());
         return model;
     }
 }

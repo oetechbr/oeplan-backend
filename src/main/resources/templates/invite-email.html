@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Convite para Plataforma</title>
+    <style>
+        body {
+          margin: 0;
+          padding: 0;
+          background-color: #f4f4f4;
+          font-family: Arial, sans-serif;
+        }
+
+        .container {
+          max-width: 600px;
+          margin: 30px auto;
+          background-color: #ffffff;
+          border-radius: 10px;
+          overflow: hidden;
+        }
+
+        .header {
+          background-color: #4fc3b1;
+          padding: 20px;
+          text-align: center;
+        }
+
+        .header h1 {
+          color: #ffffff;
+          margin: 0;
+          font-size: 24px;
+        }
+
+        .body {
+          padding: 30px;
+          text-align: center;
+        }
+
+        .body img {
+          width: 120px;
+          margin: 10px 0;
+        }
+
+        .body h2 {
+          color: #333333;
+          font-size: 20px;
+          margin-bottom: 20px;
+        }
+
+        .body p {
+          color: #555555;
+          font-size: 16px;
+        }
+
+        .footer {
+          text-align: center;
+          padding: 20px;
+          padding-top: 0px;
+          font-size: 12px;
+          color: #999999;
+        }
+
+        .warning {
+            color: #e67e22;
+            font-size: 0.8em !important;
+            background-color: #fef6e7;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #f5cba7;
+            margin-bottom: 0;
+        }
+
+        .button {
+          display: inline-block;
+          background-color: #4fc3b1;
+          color: white;
+          padding: 12px 24px;
+          border-radius: 5px;
+          text-decoration: none;
+          font-weight: bold;
+          margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Confirmação de Convite</h1>
+    </div>
+    <div class="body">
+        <img src="https://www.svgrepo.com/show/49750/circle.svg" width="40" height="40" alt="Logo"/>
+        <h2><span th:text="${user}">[Nome]</span> convidou você para o OEPlan!</h2>
+        <p>
+            Olá, professor(a)!
+        </p>
+        <p>
+            Gostaria de convidá-lo(a) para acessar nossa plataforma educacional.
+            Clique no botão abaixo para aceitar o convite e começar a usar todos os recursos disponíveis.
+        </p>
+        <a th:href="${inviteUrl}" target="_blank" class="button">Acessar plataforma</a>
+        <p class="warning">
+            ⚠️ Este link não expira, use a qualquer momento para acessar a plataforma.
+        </p>
+    </div>
+    <div class="footer">
+        <span>Se você não esperava esse convite, pode ignorar este e-mail.</span>
+        <br>
+        <span>© 2025 OEPlan</span>
+    </div>
+</div>
+</body>
+</html>

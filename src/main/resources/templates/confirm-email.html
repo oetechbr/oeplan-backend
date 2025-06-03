@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Confirmação de E-mail</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .header {
+            background-color: #4fc3b1;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #ffffff;
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .body {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .body img {
+            width: 120px;
+            margin: 10px 0;
+        }
+
+        .body h2 {
+            color: #333333;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .body p {
+            color: #555555;
+            font-size: 16px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            padding-top: 0px;
+            font-size: 12px;
+            color: #999999;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #4fc3b1;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Confirmação de E-mail</h1>
+    </div>
+    <div class="body">
+        <img src="https://www.svgrepo.com/show/49750/circle.svg" width="40" height="40" alt="Logo"/>
+        <h2>Confirme seu endereço de e-mail</h2>
+        <p>Olá,</p>
+        <p>
+            Para ativar sua conta e começar a usar a plataforma educacional OEPlan, confirme seu endereço de e-mail
+            clicando no botão abaixo.
+        </p>
+        <a th:href="${confirmLink}" target="_blank" class="button">Confirmar E-mail</a>
+    </div>
+    <div class="footer">
+        <span>Se você não criou uma conta, pode ignorar este e-mail.</span>
+        <br>
+        <span>© 2025 OEPlan</span>
+    </div>
+</div>
+</body>
+</html>
