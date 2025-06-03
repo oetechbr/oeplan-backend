@@ -8,15 +8,13 @@ import br.tech.oe.plan.exception.InternalServerErrorException;
 import br.tech.oe.plan.exception.ItemNotFoundException;
 import br.tech.oe.plan.mapper.TaskMapper;
 import br.tech.oe.plan.model.TaskModel;
-import br.tech.oe.plan.model.UserModel;
 import br.tech.oe.plan.repository.GroupRepository;
 import br.tech.oe.plan.repository.TaskRepository;
 import br.tech.oe.plan.repository.UserRepository;
+import br.tech.oe.plan.security.utils.SecurityUtils;
 import br.tech.oe.plan.service.TaskService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -60,8 +58,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskDTO save(CreateTaskDTO task) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        var user = (UserModel) authentication.getPrincipal();
+        var user = SecurityUtils.getAuthenticatedOrThrow();
 
         var model = TaskMapper.fromDTO(task);
         model.setAssignedBy(user);

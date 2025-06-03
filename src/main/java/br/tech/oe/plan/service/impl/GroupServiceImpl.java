@@ -7,14 +7,12 @@ import br.tech.oe.plan.exception.InternalServerErrorException;
 import br.tech.oe.plan.exception.ItemNotFoundException;
 import br.tech.oe.plan.mapper.GroupMapper;
 import br.tech.oe.plan.model.GroupModel;
-import br.tech.oe.plan.model.UserModel;
 import br.tech.oe.plan.repository.GroupRepository;
 import br.tech.oe.plan.repository.UserRepository;
+import br.tech.oe.plan.security.utils.SecurityUtils;
 import br.tech.oe.plan.service.GroupService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,8 +36,7 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public List<GroupDTO> findAll() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        var user = (UserModel) authentication.getPrincipal();
+        var user = SecurityUtils.getAuthenticatedOrThrow();
 
         List<GroupModel> res = groupRepository.findAllByOwnerUuid(user.getUuid());
         return GroupMapper.toDTO(res);
