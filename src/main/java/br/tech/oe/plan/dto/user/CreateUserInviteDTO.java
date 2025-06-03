@@ -6,20 +6,9 @@ import java.time.Instant;
 
 public class CreateUserInviteDTO {
     @NotNull
-    private String description;
-
-    @NotNull
     private CreateUserDTO user;
 
     private Instant expiresAt;
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public CreateUserDTO getUser() {
         return user;

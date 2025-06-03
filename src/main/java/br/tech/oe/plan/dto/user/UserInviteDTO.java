@@ -10,7 +10,6 @@ import java.time.Instant;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserInviteDTO implements Serializable {
     private String token;
-    private String description;
     private SimpleUserDTO invitedBy;
     private SimpleUserDTO invitedUser;
     private InviteStatus status;
@@ -25,14 +24,6 @@ public class UserInviteDTO implements Serializable {
 
     public void setToken(String token) {
         this.token = token;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public SimpleUserDTO getInvitedBy() {
