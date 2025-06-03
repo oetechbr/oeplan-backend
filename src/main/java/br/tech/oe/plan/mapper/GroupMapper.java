@@ -12,7 +12,7 @@ public class GroupMapper {
     public static GroupDTO toDTO(GroupModel model) {
         GroupDTO dto = new GroupDTO();
         dto.setUuid(model.getUuid());
-        dto.setOwnerUuid(model.getOwner().getUuid());
+        dto.setOwnerUuid(UserMapper.toSimpleUserDTO(model.getOwner()));
         dto.setTitle(model.getTitle());
         dto.setDescription(model.getDescription());
         dto.setCode(model.getCode());

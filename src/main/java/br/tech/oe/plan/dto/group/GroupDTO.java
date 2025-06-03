@@ -1,14 +1,14 @@
 package br.tech.oe.plan.dto.group;
 
 import br.tech.oe.plan.dto.BaseDTO;
+import br.tech.oe.plan.dto.SimpleUserDTO;
 import br.tech.oe.plan.enums.GroupVisibility;
 
 import java.time.Instant;
 import java.util.List;
-import java.util.UUID;
 
 public class GroupDTO extends BaseDTO {
-    private UUID ownerUuid;
+    private SimpleUserDTO owner;
     private String title;
     private String description;
     private String code;
@@ -19,12 +19,12 @@ public class GroupDTO extends BaseDTO {
     private GroupVisibility visibility;
     private Instant archivedAt;
 
-    public UUID getOwnerUuid() {
-        return ownerUuid;
+    public SimpleUserDTO getOwner() {
+        return owner;
     }
 
-    public void setOwnerUuid(UUID ownerUuid) {
-        this.ownerUuid = ownerUuid;
+    public void setOwnerUuid(SimpleUserDTO owner) {
+        this.owner = owner;
     }
 
     public String getTitle() {
