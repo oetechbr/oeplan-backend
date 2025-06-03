@@ -23,7 +23,6 @@ public class InviteMapper {
         var dto = new UserInviteDTO();
         var token = Base64Utils.uuidToBase64(model.getUuid());
         dto.setToken(token);
-        dto.setDescription(model.getDescription());
         dto.setInvitedBy(toInviteUserDTO(model.getInvitedBy()));
         dto.setInvitedUser(toInviteUserDTO(model.getInvitedUser()));
         dto.setStatus(model.getStatus());
