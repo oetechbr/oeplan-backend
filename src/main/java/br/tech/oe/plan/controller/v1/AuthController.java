@@ -1,6 +1,7 @@
 package br.tech.oe.plan.controller.v1;
 
 import br.tech.oe.plan.dto.user.LoginUserDTO;
+import br.tech.oe.plan.dto.user.PatchUserDTO;
 import br.tech.oe.plan.dto.user.RegisterUserDTO;
 import br.tech.oe.plan.dto.user.UserDTO;
 import br.tech.oe.plan.exception.ItemAlreadyExistException;
@@ -94,7 +95,7 @@ public class AuthController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity<?> me(HttpServletRequest request) {
+    public ResponseEntity<UserDTO> me(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session == null) {
             throw new NotAuthenticatedException("No active session found");
@@ -108,6 +109,18 @@ public class AuthController {
 
         UserModel user = authService.loadUserByUsername(username);
         var dto = UserMapper.toDTO(user);
+        return ResponseEntity.ok(dto);
+    }
+
+    @PatchMapping("/me")
+    public ResponseEntity<UserDTO> patchMe(@RequestBody @Valid PatchUserDTO patch, HttpServletRequest request) {
+        var dto = authService.patch(patch);
+
+        var session = request.getSession(true);
+        session.setAttribute("uuid", dto.getUuid());
+        session.setAttribute("username", dto.getUsername());
+        session.setAttribute("role", dto.getRole());
+
         return ResponseEntity.ok(dto);
     }
 }

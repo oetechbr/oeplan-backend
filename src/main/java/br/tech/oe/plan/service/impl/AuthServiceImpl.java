@@ -1,11 +1,14 @@
 package br.tech.oe.plan.service.impl;
 
+import br.tech.oe.plan.dto.user.PatchUserDTO;
 import br.tech.oe.plan.dto.user.RegisterUserDTO;
 import br.tech.oe.plan.dto.user.UserDTO;
 import br.tech.oe.plan.exception.ItemAlreadyExistException;
 import br.tech.oe.plan.mapper.UserMapper;
 import br.tech.oe.plan.model.UserModel;
 import br.tech.oe.plan.repository.UserRepository;
+import br.tech.oe.plan.security.utils.SecurityUtils;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,12 +18,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthServiceImpl implements UserDetailsService {
 
+    private final ModelMapper modelMapper;
+
     private final UserRepository userRepository;
 
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AuthServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public AuthServiceImpl(ModelMapper modelMapper, UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.modelMapper = modelMapper;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -35,6 +41,18 @@ public class AuthServiceImpl implements UserDetailsService {
 
         UserModel newUser = UserMapper.fromRegisterDTO(request);
         var res = userRepository.save(newUser);
+        return UserMapper.toDTO(res);
+    }
+
+    public UserDTO patch(PatchUserDTO patch) {
+        var user = SecurityUtils.getAuthenticatedOrThrow();
+
+        modelMapper.map(patch, user);
+
+        // Email was changed
+        if (patch.getEmail() != null) user.setEmailVerified(false);
+
+        var res = userRepository.save(user);
         return UserMapper.toDTO(res);
     }
 
