@@ -6,13 +6,11 @@ import br.tech.oe.plan.exception.ForbiddenException;
 import br.tech.oe.plan.exception.ItemNotFoundException;
 import br.tech.oe.plan.mapper.CommentMapper;
 import br.tech.oe.plan.model.CommentModel;
-import br.tech.oe.plan.model.UserModel;
 import br.tech.oe.plan.repository.CommentRepository;
 import br.tech.oe.plan.repository.TaskRepository;
+import br.tech.oe.plan.security.utils.SecurityUtils;
 import br.tech.oe.plan.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -58,8 +56,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentDTO save(UUID taskUuid, CreateCommentDTO commentDto) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        var user = (UserModel) authentication.getPrincipal();
+        var user = SecurityUtils.getAuthenticatedOrThrow();
 
         var task = taskRepository.findById(taskUuid);
         if (task.isEmpty()) throw new ItemNotFoundException("Task doesn't exist");
@@ -76,8 +73,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public void delete(UUID commentUuid) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        var user = (UserModel) authentication.getPrincipal();
+        var user = SecurityUtils.getAuthenticatedOrThrow();
 
         var comment = commentRepository.findById(commentUuid);
         if (comment.isEmpty()) {
