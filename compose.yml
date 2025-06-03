@@ -8,3 +8,10 @@ services:
       POSTGRES_DB: oeplan
     ports:
       - "5432:5432"
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: oeplan-mail
+    ports:
+      - "8025:8025" # Webapp
+      - "1025:1025" # Server
