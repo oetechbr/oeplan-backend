@@ -1,5 +1,6 @@
 package br.tech.oe.plan.mapper;
 
+import br.tech.oe.plan.dto.SimpleUserDTO;
 import br.tech.oe.plan.dto.user.CreateUserDTO;
 import br.tech.oe.plan.dto.user.RegisterUserDTO;
 import br.tech.oe.plan.dto.user.UserDTO;
@@ -63,5 +64,16 @@ public class UserMapper {
         model.setEmail(dto.getEmail());
         model.setRole(dto.getRole());
         return model;
+    }
+
+    public static SimpleUserDTO toSimpleUserDTO(UserModel model) {
+        SimpleUserDTO dto = new SimpleUserDTO();
+        dto.setUuid(model.getUuid());
+        dto.setUsername(model.getUsername());
+        dto.setFirstName(model.getFirstName());
+        dto.setLastName(model.getLastName());
+        dto.setEmail(model.getEmail());
+        dto.setAvatarUrl(model.getAvatarUrl());
+        return dto;
     }
 }
