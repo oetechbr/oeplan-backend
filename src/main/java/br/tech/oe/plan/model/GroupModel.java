@@ -69,6 +69,17 @@ public class GroupModel {
     @UpdateTimestamp
     private Instant updatedAt;
 
+    public GroupModel() {
+    }
+
+    public static GroupModel withUUIDOrNull(UUID uuid) {
+        if (uuid == null) return null;
+
+        var model = new GroupModel();
+        model.setUuid(uuid);
+        return model;
+    }
+
     public Long getId() {
         return id;
     }

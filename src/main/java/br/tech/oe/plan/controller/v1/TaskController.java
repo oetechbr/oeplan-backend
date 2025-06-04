@@ -1,5 +1,7 @@
 package br.tech.oe.plan.controller.v1;
 
+import br.tech.oe.plan.controller.v1.filters.CommentFilter;
+import br.tech.oe.plan.controller.v1.filters.TaskFilter;
 import br.tech.oe.plan.dto.comment.CommentDTO;
 import br.tech.oe.plan.dto.comment.CreateCommentDTO;
 import br.tech.oe.plan.dto.task.CreateTaskDTO;
@@ -39,8 +41,8 @@ public class TaskController {
     @Operation(summary = "Get all tasks")
     @ApiResponse(responseCode = "200", description = "Successful")
     @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(hidden = true)))
-    public ResponseEntity<List<TaskDTO>> findAll() {
-        return ResponseEntity.ok(taskService.findAll());
+    public ResponseEntity<List<TaskDTO>> findAll(@ModelAttribute TaskFilter filters) {
+        return ResponseEntity.ok(taskService.findAll(filters));
     }
 
     @GetMapping(value = "/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -94,8 +96,11 @@ public class TaskController {
     @Operation(summary = "Get all comments")
     @ApiResponse(responseCode = "200", description = "Successful")
     @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(hidden = true)))
-    public ResponseEntity<List<CommentDTO>> findAllComments(@PathVariable UUID taskUuid) {
-        return ResponseEntity.ok(commentService.findAll(taskUuid));
+    public ResponseEntity<List<CommentDTO>> findAllComments(
+            @PathVariable UUID taskUuid,
+            @ModelAttribute CommentFilter filters
+    ) {
+        return ResponseEntity.ok(commentService.findAll(taskUuid, filters));
     }
 
     @GetMapping(value = "/{taskUuid}/comments/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)

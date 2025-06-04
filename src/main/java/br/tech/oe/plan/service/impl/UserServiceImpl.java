@@ -1,5 +1,6 @@
 package br.tech.oe.plan.service.impl;
 
+import br.tech.oe.plan.controller.v1.filters.UserFilter;
 import br.tech.oe.plan.dto.user.UserDTO;
 import br.tech.oe.plan.exception.ItemNotFoundException;
 import br.tech.oe.plan.mapper.UserMapper;
@@ -22,7 +23,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDTO> findAll() {
+    public List<UserDTO> findAll(UserFilter filters) {
         return UserMapper.toDTO(userRepository.findAll());
     }
 
