@@ -1,4 +1,4 @@
-FROM maven:3.9.9-amazoncorretto-17-alpine AS build
+FROM maven:3.9.9-amazoncorretto-17-alpine AS builder
 
 LABEL org.opencontainers.image.title="OEPlan"
 LABEL org.opencontainers.image.url="https://oeplan-api.theproject.id"
