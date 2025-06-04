@@ -9,12 +9,18 @@ import br.tech.oe.plan.exception.NotAuthenticatedException;
 import br.tech.oe.plan.mapper.UserMapper;
 import br.tech.oe.plan.model.UserModel;
 import br.tech.oe.plan.service.impl.AuthServiceImpl;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,6 +31,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/auth")
+@Tag(
+        name = "Auth",
+        description = "Endpoints for managing auth"
+)
 public class AuthController {
 
     private final AuthServiceImpl authService;
@@ -44,7 +54,15 @@ public class AuthController {
         this.httpSessionSecurityContextRepository = httpSessionSecurityContextRepository;
     }
 
-    @PostMapping("/register")
+    @PostMapping(
+            value = "/register",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    @Operation(summary = "Register user")
+    @ApiResponse(responseCode = "201", description = "Created")
+    @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(schema = @Schema(hidden = true)))
+    @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(hidden = true)))
     public ResponseEntity<UserDTO> register(@RequestBody @Valid RegisterUserDTO user, HttpServletRequest request) {
         if (request.getSession(false) != null) {
             throw new ItemAlreadyExistException(
@@ -56,7 +74,15 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
 
-    @PostMapping("/login")
+    @PostMapping(
+            value = "/login",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    @Operation(summary = "Authenticate user")
+    @ApiResponse(responseCode = "200", description = "Successful")
+    @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(schema = @Schema(hidden = true)))
+    @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(hidden = true)))
     public ResponseEntity<?> login(
             @RequestBody @Valid LoginUserDTO userLogin,
             HttpServletRequest request,
@@ -87,14 +113,26 @@ public class AuthController {
         return ResponseEntity.ok(dto);
     }
 
-    @PostMapping("/logout")
+    @PostMapping(
+            value = "/logout",
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    @Operation(summary = "Logout current user")
+    @ApiResponse(responseCode = "200", description = "Successful")
+    @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(hidden = true)))
     public ResponseEntity<Void> logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session != null) session.invalidate();
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/me")
+    @GetMapping(
+            value = "/me",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @Operation(summary = "Get current user")
+    @ApiResponse(responseCode = "200", description = "Successful")
+    @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(hidden = true)))
     public ResponseEntity<UserDTO> me(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session == null) {
@@ -112,7 +150,16 @@ public class AuthController {
         return ResponseEntity.ok(dto);
     }
 
-    @PatchMapping("/me")
+    @PatchMapping(
+            value = "/me",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    @Operation(summary = "Patch current user")
+    @ApiResponse(responseCode = "200", description = "Successful")
+    @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content(schema = @Schema(hidden = true)))
+    @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(hidden = true)))
+    @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(hidden = true)))
     public ResponseEntity<UserDTO> patchMe(@RequestBody @Valid PatchUserDTO patch, HttpServletRequest request) {
         var dto = authService.patch(patch);
 
