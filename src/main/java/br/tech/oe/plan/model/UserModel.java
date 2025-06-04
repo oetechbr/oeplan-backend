@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serial;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -18,6 +19,9 @@ import java.util.UUID;
 @Entity
 @Table(name = "users")
 public class UserModel implements UserDetails {
+
+    @Serial
+    private static final long serialVersionUID = 214253431L;
 
     @Column(unique = true, insertable = false, updatable = false, columnDefinition = "serial")
     private Long id;
@@ -69,7 +73,7 @@ public class UserModel implements UserDetails {
     private String titlePosition;
 
     @Column
-    private boolean emailVerified;
+    private Boolean emailVerified;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -78,6 +82,17 @@ public class UserModel implements UserDetails {
     @Column
     @UpdateTimestamp
     private Instant updatedAt;
+
+    public UserModel() {
+    }
+
+    public static UserModel withUUIDOrNull(UUID uuid) {
+        if (uuid == null) return null;
+
+        var model = new UserModel();
+        model.setUuid(uuid);
+        return model;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -205,11 +220,11 @@ public class UserModel implements UserDetails {
         this.titlePosition = titlePosition;
     }
 
-    public boolean isEmailVerified() {
+    public Boolean isEmailVerified() {
         return emailVerified;
     }
 
-    public void setEmailVerified(boolean emailVerified) {
+    public void setEmailVerified(Boolean emailVerified) {
         this.emailVerified = emailVerified;
     }
 
