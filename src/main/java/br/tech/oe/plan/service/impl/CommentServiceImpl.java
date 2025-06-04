@@ -1,5 +1,6 @@
 package br.tech.oe.plan.service.impl;
 
+import br.tech.oe.plan.controller.v1.filters.CommentFilter;
 import br.tech.oe.plan.dto.comment.CommentDTO;
 import br.tech.oe.plan.dto.comment.CreateCommentDTO;
 import br.tech.oe.plan.exception.ForbiddenException;
@@ -30,13 +31,13 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<CommentDTO> findAll() {
+    public List<CommentDTO> findAll(CommentFilter filters) {
         List<CommentModel> res = commentRepository.findAll();
         return CommentMapper.toDTO(res);
     }
 
     @Override
-    public List<CommentDTO> findAll(UUID taskUuid) {
+    public List<CommentDTO> findAll(UUID taskUuid, CommentFilter filters) {
         List<CommentModel> res = commentRepository.findAllByTaskUuid(taskUuid);
         return CommentMapper.toDTO(res);
     }
