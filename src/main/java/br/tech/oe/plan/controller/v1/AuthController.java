@@ -113,10 +113,7 @@ public class AuthController {
         return ResponseEntity.ok(dto);
     }
 
-    @PostMapping(
-            value = "/logout",
-            consumes = MediaType.APPLICATION_JSON_VALUE
-    )
+    @PostMapping(value = "/logout")
     @Operation(summary = "Logout current user")
     @ApiResponse(responseCode = "200", description = "Successful")
     @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(hidden = true)))
@@ -133,6 +130,7 @@ public class AuthController {
     @Operation(summary = "Get current user")
     @ApiResponse(responseCode = "200", description = "Successful")
     @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(hidden = true)))
+    @ApiResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(hidden = true)))
     public ResponseEntity<UserDTO> me(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session == null) {
