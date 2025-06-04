@@ -16,7 +16,7 @@
     <name>OEPlan</name>
     <description>Back-end do Projeto OEPlan - Sistema para Gerenciamento de Atividades Docentes</description>
     <url/>
-    <version>0.0.1</version>
+    <version>1.0.0</version>
     <inceptionYear>2025</inceptionYear>
 
     <licenses>
@@ -133,6 +133,7 @@
     </dependencies>
 
     <build>
+        <finalName>oeplan</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
