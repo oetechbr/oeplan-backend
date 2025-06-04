@@ -1,5 +1,6 @@
 package br.tech.oe.plan.controller.v1;
 
+import br.tech.oe.plan.controller.v1.filters.GroupFilter;
 import br.tech.oe.plan.dto.group.CreateGroupDTO;
 import br.tech.oe.plan.dto.group.GroupDTO;
 import br.tech.oe.plan.dto.group.UpdateGroupDTO;
@@ -33,8 +34,8 @@ public class GroupController {
     @Operation(summary = "Get all groups")
     @ApiResponse(responseCode = "200", description = "Successful")
     @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content(schema = @Schema(hidden = true)))
-    public ResponseEntity<List<GroupDTO>> findAll() {
-        return ResponseEntity.ok(groupService.findAll());
+    public ResponseEntity<List<GroupDTO>> findAll(@ModelAttribute GroupFilter filters) {
+        return ResponseEntity.ok(groupService.findAll(filters));
     }
 
     @GetMapping(value = "/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)

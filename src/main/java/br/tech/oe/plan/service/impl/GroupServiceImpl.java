@@ -1,5 +1,6 @@
 package br.tech.oe.plan.service.impl;
 
+import br.tech.oe.plan.controller.v1.filters.GroupFilter;
 import br.tech.oe.plan.dto.group.CreateGroupDTO;
 import br.tech.oe.plan.dto.group.GroupDTO;
 import br.tech.oe.plan.dto.group.UpdateGroupDTO;
@@ -7,12 +8,15 @@ import br.tech.oe.plan.exception.InternalServerErrorException;
 import br.tech.oe.plan.exception.ItemNotFoundException;
 import br.tech.oe.plan.mapper.GroupMapper;
 import br.tech.oe.plan.model.GroupModel;
+import br.tech.oe.plan.model.UserModel;
 import br.tech.oe.plan.repository.GroupRepository;
 import br.tech.oe.plan.repository.UserRepository;
 import br.tech.oe.plan.security.utils.SecurityUtils;
 import br.tech.oe.plan.service.GroupService;
+import br.tech.oe.plan.service.utils.ServiceMatcher;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,10 +39,19 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public List<GroupDTO> findAll() {
+    public List<GroupDTO> findAll(GroupFilter filters) {
         var user = SecurityUtils.getAuthenticatedOrThrow();
 
-        List<GroupModel> res = groupRepository.findAllByOwnerUuid(user.getUuid());
+        // Cannot be null
+        var owner = new UserModel();
+        owner.setUuid(user.getUuid());
+
+        var example = new GroupModel();
+        example.setOwner(owner);
+        modelMapper.map(filters, example);
+
+        var matcher = Example.of(example, ServiceMatcher.DefaultMatcher);
+        List<GroupModel> res = groupRepository.findAll(matcher);
         return GroupMapper.toDTO(res);
     }
 
