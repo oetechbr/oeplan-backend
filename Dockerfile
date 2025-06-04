@@ -1,4 +1,4 @@
-FROM maven:3.3.2-openjdk-17 as builder
+FROM maven:3.9.9-amazoncorretto-17-alpine AS build
 
 LABEL org.opencontainers.image.title="OEPlan"
 LABEL org.opencontainers.image.url="https://oeplan-api.theproject.id"
@@ -16,8 +16,10 @@ COPY src ./src
 
 RUN mvn package -DskipTests
 
-FROM openjdk:17-jre-slim
+FROM amazoncorretto:17-alpine-jdk
 
 COPY --from=builder /app/target/*.jar oeplan.jar
+
+EXPOSE 8000
 
 ENTRYPOINT ["java","-jar","-Dspring.profiles.active=prod","/oeplan.jar"]
