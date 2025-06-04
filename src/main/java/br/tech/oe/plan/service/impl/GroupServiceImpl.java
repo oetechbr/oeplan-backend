@@ -42,12 +42,14 @@ public class GroupServiceImpl implements GroupService {
     public List<GroupDTO> findAll(GroupFilter filters) {
         var user = SecurityUtils.getAuthenticatedOrThrow();
 
-        // Cannot be null
-        var owner = new UserModel();
-        owner.setUuid(user.getUuid());
-
         var example = new GroupModel();
-        example.setOwner(owner);
+
+        if (!SecurityUtils.isAdminOrDirector()) {
+            var owner = new UserModel();
+            owner.setUuid(user.getUuid());
+            example.setOwner(owner);
+        }
+
         modelMapper.map(filters, example);
 
         var matcher = Example.of(example, ServiceMatcher.DefaultMatcher);

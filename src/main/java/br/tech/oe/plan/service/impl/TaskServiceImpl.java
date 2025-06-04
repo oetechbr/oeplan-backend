@@ -57,8 +57,7 @@ public class TaskServiceImpl implements TaskService {
         var assignedBy = UserModel.withUUIDOrNull(filters.getAssignedBy());
         var group = GroupModel.withUUIDOrNull(filters.getGroupUuid());
 
-        // Only allow tasks from current user
-        if (filters.getGroupUuid() == null) {
+        if (!SecurityUtils.isAdminOrDirector() && filters.getGroupUuid() == null) {
             var assignedTo = UserModel.withUUIDOrNull(user.getUuid());
             example.setAssignedTo(assignedTo);
         }

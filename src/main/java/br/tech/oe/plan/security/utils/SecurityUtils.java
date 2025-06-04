@@ -1,5 +1,6 @@
 package br.tech.oe.plan.security.utils;
 
+import br.tech.oe.plan.enums.UserRole;
 import br.tech.oe.plan.exception.ForbiddenException;
 import br.tech.oe.plan.model.UserModel;
 import org.springframework.security.core.Authentication;
@@ -18,5 +19,10 @@ public class SecurityUtils {
             throw new ForbiddenException("Access denied");
         }
         return (UserModel) authentication.getPrincipal();
+    }
+
+    public static boolean isAdminOrDirector() {
+        var auth = getAuthenticatedOrThrow();
+        return auth.getRole() == UserRole.ADMIN || auth.getRole() == UserRole.DIRECTOR;
     }
 }
