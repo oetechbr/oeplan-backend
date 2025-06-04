@@ -34,11 +34,16 @@ jobs:
           distribution: 'corretto'
           cache: 'maven'
 
+      - name: Set up Maven
+        uses: s4u/setup-maven-action@v1
+        with:
+          maven-version: '3.3.2'
+
       # Build
 
       ## Build project
       - name: Build project
-        run: ./mvnw package --file pom.xml -Dmaven.test.skip=true -DskipTests
+        run: mvn package --file pom.xml -Dmaven.test.skip=true -DskipTests
 
       ## Build docker
       - name: Docker build
