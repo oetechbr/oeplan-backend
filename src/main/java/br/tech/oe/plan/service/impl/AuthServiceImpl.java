@@ -32,7 +32,7 @@ public class AuthServiceImpl implements UserDetailsService {
     }
 
     public UserDTO save(RegisterUserDTO request) {
-        if (userRepository.findByUsername(request.getUsername()) != null) {
+        if (userRepository.findByUsername(request.getUsername()).isPresent()) {
             throw new ItemAlreadyExistException("Username already exist");
         }
 
@@ -58,6 +58,8 @@ public class AuthServiceImpl implements UserDetailsService {
 
     @Override
     public UserModel loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username);
+        return userRepository.findByUsername(username).orElseThrow(
+                () -> new UsernameNotFoundException("User doesn't exist")
+        );
     }
 }
