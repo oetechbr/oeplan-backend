@@ -34,13 +34,13 @@ public class MailServiceImpl implements MailService {
         String processHtml = templateEngine.process("invite-email", context);
 
         MimeMessage mimeMessage = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "UTF-8");
 
         try {
             helper.setText(processHtml, true);
             helper.setTo(invite.getTo());
             helper.setSubject(invite.getTitle());
-            helper.setFrom("noreply@example.com");
+            helper.setFrom("noreply@theproject.id");
             mailSender.send(mimeMessage);
         } catch (Exception e) {
             log.error(e.getMessage());

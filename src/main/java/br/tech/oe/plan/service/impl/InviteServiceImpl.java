@@ -88,7 +88,7 @@ public class InviteServiceImpl implements InviteService {
         );
         var token = Base64Utils.uuidToBase64(model.getUuid());
         var inviteMail = new InviteMailRequest();
-        inviteMail.setTitle(user.getFirstName() + " " + inviteMessage);
+        inviteMail.setTitle(inviteMessage);
         inviteMail.setTo(model.getEmail());
         inviteMail.setInviteUrl(inviteUrl + "?token=" + token);
         inviteMail.setUser(user.getFirstName());
